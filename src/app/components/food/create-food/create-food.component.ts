@@ -64,8 +64,13 @@ export class CreateFoodComponent implements OnInit {
   }
 
   saveFood() {
+    const that = this;
     console.log(this.dataFood);
-    
+    axios.post('https://api.imgur.com/3/image', that.dataFood).then(function (response) {
+      console.log(response);
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 
   ngOnInit() {
