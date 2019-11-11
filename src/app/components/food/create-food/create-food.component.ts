@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-create-food',
@@ -9,8 +10,6 @@ import axios from 'axios';
 export class CreateFoodComponent implements OnInit {
 
   constructor() { }
-
-  API_CATEGORY: string = 'http://localhost:8080/api/category';
 
   listCategory: any = [];
 
@@ -66,7 +65,7 @@ export class CreateFoodComponent implements OnInit {
   saveFood() {
     const that = this;
     console.log(this.dataFood);
-    axios.post('https://api.imgur.com/3/image', that.dataFood).then(function (response) {
+    axios.post(`${environment.api_url}/api/food/create`, that.dataFood).then(function (response) {
       console.log(response);
     }).catch(function (error) {
       console.log(error);
@@ -74,7 +73,7 @@ export class CreateFoodComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getListCategory(this.API_CATEGORY);
+    this.getListCategory(`${environment.api_url}/api/category`);
   }
 
 }

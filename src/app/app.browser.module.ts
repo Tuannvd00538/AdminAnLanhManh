@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,31 +13,15 @@ import { CreateSetComponent } from './components/set/create-set/create-set.compo
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { AuthService } from './service/auth.service';
-import { CommonModule } from '@angular/common';
-import { TransferHttpCacheModule } from '@nguniversal/common';
-import { HttpClientModule } from '@angular/common/http';
-import { NgtUniversalModule } from '@ng-toolkit/universal';
+import { AppModule } from './app.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainComponent,
-    CreateCategoryComponent,
-    ListCategoryComponent,
-    ListFoodComponent,
-    CreateFoodComponent,
-    ListSetComponent,
-    CreateSetComponent,
-    LoginComponent
-  ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    
     AppRoutingModule,
     FormsModule,
-    CommonModule,
-    TransferHttpCacheModule,
-    HttpClientModule,
-    NgtUniversalModule
+    AppModule,
+    BrowserTransferStateModule
   ],
   providers: [
     AuthService,
@@ -45,4 +29,4 @@ import { NgtUniversalModule } from '@ng-toolkit/universal';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppBrowserModule { }

@@ -1,7 +1,7 @@
-<aside class="aside aside-fixed">
+<aside class="aside aside-fixed" *ngIf="isLogin">
   <div class="aside-header">
     <a href="/" class="aside-logo">Admin<span>Panel</span></a>
-    <a href="" class="aside-menu-link">
+    <a href="javascript:void(0)" class="aside-menu-link">
       <i data-feather="menu"></i>
       <i data-feather="x"></i>
     </a>
@@ -9,10 +9,10 @@
   <div class="aside-body">
     <div class="aside-loggedin">
       <div class="d-flex align-items-center justify-content-start">
-        <a href="" class="avatar"><img src="https://graph.facebook.com/100009112376938/picture?width=200&height=200"
+        <a href="javascript:void(0)" class="avatar"><img src="https://graph.facebook.com/100009112376938/picture?width=200&height=200"
             class="rounded-circle" alt=""></a>
         <div class="aside-alert-link">
-          <a href="" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
+          <a href="javascript:void(0)" (click)="logout()" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
         </div>
       </div>
       <div class="aside-loggedin-user">
@@ -24,15 +24,15 @@
       </div>
       <div class="collapse" id="loggedinMenu">
         <ul class="nav nav-aside mg-b-0">
-          <li class="nav-item"><a href="" class="nav-link"><i data-feather="edit"></i> <span>Edit Profile</span></a>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="edit"></i> <span>Edit Profile</span></a>
           </li>
-          <li class="nav-item"><a href="" class="nav-link"><i data-feather="user"></i> <span>View Profile</span></a>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="user"></i> <span>View Profile</span></a>
           </li>
-          <li class="nav-item"><a href="" class="nav-link"><i data-feather="settings"></i> <span>Account
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="settings"></i> <span>Account
                 Settings</span></a></li>
-          <li class="nav-item"><a href="" class="nav-link"><i data-feather="help-circle"></i> <span>Help
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="help-circle"></i> <span>Help
                 Center</span></a></li>
-          <li class="nav-item"><a href="" class="nav-link"><i data-feather="log-out"></i> <span>Sign Out</span></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" (click)="logout()" class="nav-link"><i data-feather="log-out"></i> <span>Sign Out</span></a></li>
         </ul>
       </div>
     </div><!-- aside-loggedin -->
@@ -69,16 +69,16 @@
   </div>
 </aside>
 
-<div class="content ht-100v pd-0">
+<div class="content ht-100v pd-0" *ngIf="isLogin">
   <div class="content-header">
     <div class="content-search">
       <i data-feather="search"></i>
       <input type="search" class="form-control" placeholder="Search...">
     </div>
     <nav class="nav">
-      <a href="" class="nav-link"><i data-feather="help-circle"></i></a>
-      <a href="" class="nav-link"><i data-feather="grid"></i></a>
-      <a href="" class="nav-link"><i data-feather="align-left"></i></a>
+      <a href="javascript:void(0)" class="nav-link"><i data-feather="help-circle"></i></a>
+      <a href="javascript:void(0)" class="nav-link"><i data-feather="grid"></i></a>
+      <a href="javascript:void(0)" class="nav-link"><i data-feather="align-left"></i></a>
     </nav>
   </div><!-- content-header -->
 
@@ -88,3 +88,4 @@
 
   </div>
 </div>
+<router-outlet *ngIf="!isLogin"></router-outlet>

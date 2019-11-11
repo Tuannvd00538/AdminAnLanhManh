@@ -1,0 +1,36 @@
+<div class="content content-fixed content-auth">
+    <div class="container">
+        <div class="media align-items-stretch justify-content-center ht-100p pos-relative">
+            <div class="media-body align-items-center d-none d-lg-flex">
+                <div class="mx-wd-600">
+                    <img src="http://pe4everykid.weebly.com/uploads/1/2/4/8/12487453/welcome-back-class-dojo_1_orig.jpg"
+                        class="img-fluid" alt="">
+                </div>
+            </div><!-- media-body -->
+            <div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">
+                <div class="wd-100p">
+                    <h3 class="tx-color-01 mg-b-5">Sign In</h3>
+                    <p class="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
+                    <div class="alert alert-solid alert-danger" role="alert" *ngIf="textError != null">
+                        {{textError}}
+                    </div>
+                    <div class="form-group">
+                        <label>Account</label>
+                        <input type="text" #account (keyup.enter)="login(account.value, password.value)" class="form-control" placeholder="Username or phone">
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex justify-content-between mg-b-5">
+                            <label class="mg-b-0-f">Password</label>
+                            <a href="javascript:void(0)" class="tx-13">Forgot password?</a>
+                        </div>
+                        <input type="password" #password (keyup.enter)="login(account.value, password.value)" class="form-control" placeholder="Enter your password">
+                    </div>
+                    <button class="btn btn-brand-02 btn-block" (click)="login(account.value, password.value)">Sign
+                        In</button>
+                    <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a
+                            href="https://www.facebook.com/TuanMinPay" target="_blank">Contact admin to create</a></div>
+                </div>
+            </div><!-- sign-wrapper -->
+        </div><!-- media -->
+    </div><!-- container -->
+</div><!-- content -->
