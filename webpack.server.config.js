@@ -10,9 +10,6 @@ module.exports = {
     server: './server.ts',
 	prerender: './prerender.ts'
   },
-  externals: {
-    './dist/server/main': 'require("./server/main")'
-  },
   target: 'node',
   resolve: { extensions: ['.ts', '.js'] },
   optimization: {
