@@ -5,52 +5,37 @@
     </ol>
 </nav>
 <div class="table-responsive mt-4">
-    <table class="table table-bordered mg-b-0">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
-                <th scope="col">Job Title</th>
-                <th scope="col">Degree</th>
-                <th scope="col">Salary</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Adrian Monino</td>
-                <td>Front-End Engineer</td>
-                <td>Computer Science</td>
-                <td>$120,000</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Socrates Itumay</td>
-                <td>Software Engineer</td>
-                <td>Computer Engineering</td>
-                <td>$150,000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Reynante Labares</td>
-                <td>Product Manager</td>
-                <td>Business Management</td>
-                <td>$250,000</td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>Hamza Macasindil</td>
-                <td>Software Engineer</td>
-                <td>Computer Engineering</td>
-                <td>$140,000</td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>Roven Galeon</td>
-                <td>Project Manager</td>
-                <td>Accountancy</td>
-                <td>$160,000</td>
+            <tr *ngFor="let item of listFood.data">
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.price}}</td>
+                <td>
+                    <a href="javascript:void(0)" class="mg-r-5">Edit</a>
+                    <a href="javascript:void(0)" class="text-danger">Delete</a>
+                </td>
             </tr>
         </tbody>
     </table>
 </div><!-- table-responsive -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination pagination-filled mg-b-0">
+        <li class="page-item disabled"><a class="page-link page-link-icon" href="#"><i
+                    data-feather="chevron-left"></i></a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link page-link-icon" href="#"><i data-feather="chevron-right"></i></a></li>
+    </ul>
+</nav>

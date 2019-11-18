@@ -4,3 +4,36 @@
         <li class="breadcrumb-item active" aria-current="page">Create Category</li>
     </ol>
 </nav>
+<div data-label="Add Category" class="df-example demo-forms mt-4">
+    <form data-parsley-validate (ngSubmit)="saveCategory($event)">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="nameFood">Name<span class="tx-danger">*</span></label>
+                <input required type="text" class="form-control" id="nameFood" placeholder="Name"
+                    [(ngModel)]="dataCategory.name" name="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="descriptionFood">Description<span class="tx-danger">*</span></label>
+            <textarea class="form-control" id="descriptionFood" rows="2" placeholder="Description"
+                [(ngModel)]="dataCategory.description" name="description" required></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="thumbnail">Image<span class="tx-danger">*</span></label>
+                <div class="custom-file">
+                    <input required type="file" class="custom-file-input" id="thumbnail" (change)="fileChange($event)">
+                    <label class="custom-file-label"
+                        for="thumbnail">{{(dataCategory.image == null) ? 'Choose file' : dataCategory.image}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row" *ngIf="dataCategory.image != null">
+            <div class="form-group col-md-3">
+                <label for="preview">Preview Thumbnail</label>
+                <img id="preview" [src]="dataCategory.image" width="100%" height="auto">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Category</button>
+    </form>
+</div><!-- df-example -->

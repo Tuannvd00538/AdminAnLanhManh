@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import axios from 'axios';
 import { environment } from '../../../../environments/environment';
+import { LOCAL_STORAGE } from '@ng-toolkit/universal';
+import { UtilService } from 'src/app/service/util.service';
 
 @Component({
   selector: 'app-create-food',
@@ -9,7 +11,10 @@ import { environment } from '../../../../environments/environment';
 })
 export class CreateFoodComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(LOCAL_STORAGE) private localStorage: any,
+    private service: UtilService
+  ) { }
 
   listCategory: any = [];
 
@@ -43,33 +48,39 @@ export class CreateFoodComponent implements OnInit {
     });
   }
 
-  fileChange(event: { target: { files: FileList; }; }): void {
+  fileChange(event) {
     const that = this;
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       const file = fileList[0];
-
       const formData = new FormData();
       formData.append('image', file, file.name);
-
       axios.post('https://api.imgur.com/3/image', formData, { headers: { 'Authorization': 'Client-ID d72ab777aaeb0dc' } }).then(function (response) {
         that.dataFood.image = response.data.data.link;
       }).catch(function (error) {
         that.dataFood.image = null;
         console.log(error);
       });
-
     }
   }
 
-  saveFood() {
+  token: any = this.localStorage.getItem('token');
+
+  saveFood(e) {
     const that = this;
     console.log(this.dataFood);
-    axios.post(`${environment.api_url}/api/food/create`, that.dataFood).then(function (response) {
-      console.log(response);
-    }).catch(function (error) {
-      console.log(error);
-    });
+    var check = true;
+    for (var key in this.dataFood) {
+      if (this.dataFood[key] == null) check = false;
+    }
+
+    if (check) {
+      axios.post(`${environment.api_url}/api/food/create`, that.dataFood, { headers: { Authorization: that.token } }).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
   }
 
   ngOnInit() {

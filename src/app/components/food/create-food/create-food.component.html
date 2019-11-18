@@ -5,107 +5,107 @@
     </ol>
 </nav>
 <div data-label="Add Food" class="df-example demo-forms mt-4">
-    <form>
+    <form data-parsley-validate (ngSubmit)="saveFood($event)">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="nameFood">Name</label>
-                <input type="text" class="form-control" id="nameFood" placeholder="Name" [(ngModel)]="dataFood.name"
-                    name="name">
+                <label for="nameFood">Name<span class="tx-danger">*</span></label>
+                <input required type="text" class="form-control" id="nameFood" placeholder="Name"
+                    [(ngModel)]="dataFood.name" name="name">
             </div>
             <div class="form-group col-md-6">
-                <label for="priceFood">Price</label>
-                <input type="number" class="form-control" id="priceFood" placeholder="5" [(ngModel)]="dataFood.price"
-                    name="price">
+                <label for="priceFood">Price<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="priceFood" placeholder="5"
+                    [(ngModel)]="dataFood.price" name="price">
             </div>
         </div>
         <div class="form-group">
-            <label for="descriptionFood">Description</label>
+            <label for="descriptionFood">Description<span class="tx-danger">*</span></label>
             <textarea class="form-control" id="descriptionFood" rows="2" placeholder="Description"
-                [(ngModel)]="dataFood.description" name="description"></textarea>
+                [(ngModel)]="dataFood.description" name="description" required></textarea>
         </div>
         <div class="form-row">
             <div class="form-group col-md-2">
-                <label for="carbonhydrates">Cacbohydrat</label>
-                <input type="number" class="form-control" id="carbonhydrates" placeholder="5"
+                <label for="carbonhydrates">Cacbohydrat<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="carbonhydrates" placeholder="5"
                     [(ngModel)]="dataFood.carbonhydrates" name="carbonhydrates">
             </div>
             <div class="form-group col-md-2">
-                <label for="protein">Protein</label>
-                <input type="number" class="form-control" id="protein" placeholder="5" [(ngModel)]="dataFood.protein"
-                    name="protein">
+                <label for="protein">Protein<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="protein" placeholder="5"
+                    [(ngModel)]="dataFood.protein" name="protein">
             </div>
             <div class="form-group col-md-2">
-                <label for="lipid">Lipid</label>
-                <input type="number" class="form-control" id="lipid" placeholder="5"
+                <label for="lipid">Lipid<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="lipid" placeholder="5"
                     [(ngModel)]="dataFood.lipid" name="lipid">
             </div>
             <div class="form-group col-md-2">
-                <label for="xenluloza">Cellulose</label>
-                <input type="number" class="form-control" id="xenluloza" placeholder="5"
+                <label for="xenluloza">Cellulose<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="xenluloza" placeholder="5"
                     [(ngModel)]="dataFood.xenluloza" name="xenluloza">
             </div>
             <div class="form-group col-md-2">
-                <label for="canxi">Canxi</label>
-                <input type="number" class="form-control" id="canxi" placeholder="5" [(ngModel)]="dataFood.canxi"
-                    name="canxi">
+                <label for="canxi">Canxi<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="canxi" placeholder="5"
+                    [(ngModel)]="dataFood.canxi" name="canxi">
             </div>
             <div class="form-group col-md-2">
-                <label for="iron">Iron</label>
-                <input type="number" class="form-control" id="iron" placeholder="5" [(ngModel)]="dataFood.iron"
+                <label for="iron">Iron<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="iron" placeholder="5" [(ngModel)]="dataFood.iron"
                     name="iron">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-2">
-                <label for="zinc">Zinc</label>
-                <input type="number" class="form-control" id="zinc" placeholder="5" [(ngModel)]="dataFood.zinc"
+                <label for="zinc">Zinc<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="zinc" placeholder="5" [(ngModel)]="dataFood.zinc"
                     name="zinc">
             </div>
             <div class="form-group col-md-2">
-                <label for="vitaminA">Vitamin A</label>
-                <input type="number" class="form-control" id="vitaminA" placeholder="5" [(ngModel)]="dataFood.vitaminA"
-                    name="vitaminA">
+                <label for="vitaminA">Vitamin A<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="vitaminA" placeholder="5"
+                    [(ngModel)]="dataFood.vitaminA" name="vitaminA">
             </div>
             <div class="form-group col-md-2">
-                <label for="vitaminB">Vitamin B</label>
-                <input type="number" class="form-control" id="vitaminB" placeholder="5" [(ngModel)]="dataFood.vitaminB"
-                    name="vitaminB">
+                <label for="vitaminB">Vitamin B<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="vitaminB" placeholder="5"
+                    [(ngModel)]="dataFood.vitaminB" name="vitaminB">
             </div>
             <div class="form-group col-md-2">
-                <label for="vitaminC">Vitamin C</label>
-                <input type="number" class="form-control" id="vitaminC" placeholder="5" [(ngModel)]="dataFood.vitaminC"
-                    name="vitaminC">
+                <label for="vitaminC">Vitamin C<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="vitaminC" placeholder="5"
+                    [(ngModel)]="dataFood.vitaminC" name="vitaminC">
             </div>
             <div class="form-group col-md-2">
-                <label for="vitaminD">Vitamin D</label>
-                <input type="number" class="form-control" id="vitaminD" placeholder="5" [(ngModel)]="dataFood.vitaminD"
-                    name="vitaminD">
+                <label for="vitaminD">Vitamin D<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="vitaminD" placeholder="5"
+                    [(ngModel)]="dataFood.vitaminD" name="vitaminD">
             </div>
             <div class="form-group col-md-2">
-                <label for="vitaminE">Vitamin E</label>
-                <input type="number" class="form-control" id="vitaminE" placeholder="5" [(ngModel)]="dataFood.vitaminE"
-                    name="vitaminE">
+                <label for="vitaminE">Vitamin E<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="vitaminE" placeholder="5"
+                    [(ngModel)]="dataFood.vitaminE" name="vitaminE">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-2">
-                <label for="calorie">Calories</label>
-                <input type="number" class="form-control" id="calorie" placeholder="5" [(ngModel)]="dataFood.calorie"
-                    name="calorie">
+                <label for="calorie">Calories<span class="tx-danger">*</span></label>
+                <input required type="number" class="form-control" id="calorie" placeholder="5"
+                    [(ngModel)]="dataFood.calorie" name="calorie">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="thumbnail">Thumbnaill</label>
+                <label for="thumbnail">Thumbnaill<span class="tx-danger">*</span></label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="thumbnail" (change)="fileChange($event)">
+                    <input required type="file" class="custom-file-input" id="thumbnail" (change)="fileChange($event)">
                     <label class="custom-file-label"
                         for="thumbnail">{{(dataFood.image == null) ? 'Choose file' : dataFood.image}}</label>
                 </div>
             </div>
             <div class="form-group col-md-6">
-                <label>Category</label>
-                <select class="form-control" multiple="multiple" [(ngModel)]="dataFood.cateId" name="cateId">
+                <label>Category<span class="tx-danger">*</span></label>
+                <select class="form-control" multiple="multiple" [(ngModel)]="dataFood.cateId" name="cateId" required>
                     <option *ngFor="let item of listCategory" [value]="item.id">{{item.name}}</option>
                 </select>
             </div>
@@ -116,6 +116,6 @@
                 <img id="preview" [src]="dataFood.image" width="100%" height="auto">
             </div>
         </div>
-        <button type="button" class="btn btn-primary" (click)="saveFood()">Save Food</button>
+        <button type="submit" class="btn btn-primary">Save Food</button>
     </form>
 </div><!-- df-example -->

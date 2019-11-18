@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgtUniversalModule } from '@ng-toolkit/universal';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { NgtUniversalModule } from '@ng-toolkit/universal';
     CommonModule,
     TransferHttpCacheModule,
     HttpClientModule,
-    NgtUniversalModule
+    NgtUniversalModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthService,

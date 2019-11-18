@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import axios from 'axios';
 import { LOCAL_STORAGE, WINDOW } from '@ng-toolkit/universal';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +18,17 @@ export class AuthService {
       that.textError = "All field is require.";
     } else {
       that.textError = null;
-      await axios.post('http://localhost:8080/api/auth/admin/signin', {
+      await axios.post(`${environment.api_url}/api/auth/admin/signin`, {
         account: account,
         password: password
       }).then(function (response) {
         that.textError = null;
-        this.localStorage.setItem("token", response.data.accessToken);
-        this.window.location.href = '/';
+        that.localStorage.setItem("token", response.data.accessToken);
+        that.window.location.href = '/';
         return true;
       }).catch(function (error) {
+        console.log(error);
+        
         that.textError = error.response.data.message;
       });
     }
