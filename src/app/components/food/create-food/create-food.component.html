@@ -105,7 +105,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label>Category<span class="tx-danger">*</span></label>
-                <select class="form-control" multiple="multiple" [(ngModel)]="dataFood.cateId" name="cateId" required>
+                <select class="form-control" multiple="multiple" [(ngModel)]="dataFood.categories" name="categories" required>
                     <option *ngFor="let item of listCategory" [value]="item.id">{{item.name}}</option>
                 </select>
             </div>
@@ -116,6 +116,9 @@
                 <img id="preview" [src]="dataFood.image" width="100%" height="auto">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Save Food</button>
+        <button type="submit" class="btn btn-primary">{{editMode ? 'Update' : 'Save'}}</button>
+        <div class="spinner-border pos-absolute mg-l-5" role="status" *ngIf="isLoading">
+            <span class="sr-only">Loading...</span>
+        </div>
     </form>
 </div><!-- df-example -->

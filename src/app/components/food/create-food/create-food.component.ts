@@ -3,6 +3,8 @@ import axios from 'axios';
 import { environment } from '../../../../environments/environment';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import { UtilService } from 'src/app/service/util.service';
+import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-food',
@@ -13,7 +15,7 @@ export class CreateFoodComponent implements OnInit {
 
   constructor(
     @Inject(LOCAL_STORAGE) private localStorage: any,
-    private service: UtilService
+    private route: ActivatedRoute
   ) { }
 
   listCategory: any = [];
@@ -36,8 +38,10 @@ export class CreateFoodComponent implements OnInit {
     vitaminD: null,
     vitaminE: null,
     calorie: null,
-    cateId: null
+    categories: null
   };
+
+  isLoading: boolean = false;
 
   getListCategory(url: string) {
     const that = this;
@@ -51,14 +55,17 @@ export class CreateFoodComponent implements OnInit {
   fileChange(event) {
     const that = this;
     const fileList: FileList = event.target.files;
+    this.isLoading = true;
     if (fileList.length > 0) {
       const file = fileList[0];
       const formData = new FormData();
       formData.append('image', file, file.name);
       axios.post('https://api.imgur.com/3/image', formData, { headers: { 'Authorization': 'Client-ID d72ab777aaeb0dc' } }).then(function (response) {
+        that.isLoading = false;
         that.dataFood.image = response.data.data.link;
       }).catch(function (error) {
         that.dataFood.image = null;
+        that.isLoading = false;
         console.log(error);
       });
     }
@@ -68,23 +75,82 @@ export class CreateFoodComponent implements OnInit {
 
   saveFood(e) {
     const that = this;
-    console.log(this.dataFood);
+    this.isLoading = true;
     var check = true;
     for (var key in this.dataFood) {
       if (this.dataFood[key] == null) check = false;
     }
-
     if (check) {
-      axios.post(`${environment.api_url}/api/food/create`, that.dataFood, { headers: { Authorization: that.token } }).then(function (response) {
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
+      if (this.editMode) {
+        axios.put(`${environment.api_url}/api/food/update/${this.foodId}`, that.dataFood, { headers: { Authorization: that.token } }).then(function (response) {
+          Swal.fire({
+            title: 'Food updated.',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Done'
+          }).then((result) => {
+            if (result.value) {
+              window.location.href = '/food/list';
+            }
+          })
+          that.isLoading = false;
+        }).catch(function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          });
+          that.isLoading = false;
+          console.log(error);
+        });
+      } else {
+        axios.post(`${environment.api_url}/api/food/create`, that.dataFood, { headers: { Authorization: that.token } }).then(function (response) {
+          that.isLoading = false;
+          Swal.fire({
+            title: 'Food created.',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Done'
+          }).then((result) => {
+            if (result.value) {
+              window.location.href = '/food/list';
+            }
+          });
+          that.isLoading = false;
+        }).catch(function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          });
+          that.isLoading = false;
+          console.log(error);
+        });
+      }
     }
+  }
+
+  foodId: any = null;
+  editMode: boolean = false;
+
+  getFoodById(url) {
+    const that = this;
+    axios.get(url).then(function (response) {
+      that.dataFood = response.data.data;
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 
   ngOnInit() {
     this.getListCategory(`${environment.api_url}/api/category`);
+    this.foodId = this.route.snapshot.queryParamMap.get('foodId');
+    if (this.foodId != null) {
+      this.editMode = true;
+      this.getFoodById(`${environment.api_url}/api/food/${this.foodId}`);
+    }
   }
 
 }

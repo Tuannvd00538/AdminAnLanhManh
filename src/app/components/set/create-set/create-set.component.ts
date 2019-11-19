@@ -19,23 +19,6 @@ export class CreateSetComponent implements OnInit {
   listCategory: any = [];
 
   dataSet: any = {
-    name: null,
-    description: null,
-    image: null,
-    price: null,
-    carbonhydrates: null,
-    protein: null,
-    lipid: null,
-    xenluloza: null,
-    canxi: null,
-    iron: null,
-    zinc: null,
-    vitaminA: null,
-    vitaminB: null,
-    vitaminC: null,
-    vitaminD: null,
-    vitaminE: null,
-    calorie: null,
     categoryIds: null,
     foodIds: null
   };
