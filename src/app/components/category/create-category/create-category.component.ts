@@ -113,6 +113,11 @@ export class CreateCategoryComponent implements OnInit {
         });
       }
     } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'All field is required',
+        text: 'Oops...'
+      });
       this.isLoading = false;
     }
   }

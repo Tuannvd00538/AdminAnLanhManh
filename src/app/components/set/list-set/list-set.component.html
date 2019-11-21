@@ -4,3 +4,26 @@
         <li class="breadcrumb-item active" aria-current="page">List Set</li>
     </ol>
 </nav>
+<div class="table-responsive mt-4">
+    <table class="table table-bordered mg-b-0">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listSet?.data">
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>
+                    <a href="/set/create?setId={{item.id}}" class="mg-r-5">Edit</a>
+                    <a href="javascript:void(0)" (click)="deleteSet(item.id)" class="text-danger">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div><!-- table-responsive -->

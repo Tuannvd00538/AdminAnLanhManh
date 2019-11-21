@@ -38,7 +38,7 @@ export class CreateFoodComponent implements OnInit {
     vitaminD: null,
     vitaminE: null,
     calorie: null,
-    categories: null
+    cateId: null
   };
 
   isLoading: boolean = false;
@@ -75,12 +75,12 @@ export class CreateFoodComponent implements OnInit {
 
   saveFood(e) {
     const that = this;
-    this.isLoading = true;
     var check = true;
     for (var key in this.dataFood) {
       if (this.dataFood[key] == null) check = false;
     }
     if (check) {
+      this.isLoading = true;
       if (this.editMode) {
         axios.put(`${environment.api_url}/api/food/update/${this.foodId}`, that.dataFood, { headers: { Authorization: that.token } }).then(function (response) {
           Swal.fire({
@@ -129,6 +129,13 @@ export class CreateFoodComponent implements OnInit {
           console.log(error);
         });
       }
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'All field is required',
+        text: 'Oops...'
+      });
+      that.isLoading = false;
     }
   }
 

@@ -23,19 +23,12 @@
                 <td>{{item.price}}</td>
                 <td>
                     <a href="/food/create?foodId={{item.id}}" class="mg-r-5">Edit</a>
-                    <a href="javascript:void(0)" class="text-danger">Delete</a>
+                    <a href="javascript:void(0)" (click)="deleteFood(item.id)" class="text-danger">Delete</a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div><!-- table-responsive -->
-<nav aria-label="Page navigation example">
-    <ul class="pagination pagination-filled mg-b-0">
-        <li class="page-item disabled"><a class="page-link page-link-icon" href="#"><i
-                    data-feather="chevron-left"></i></a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link page-link-icon" href="#"><i data-feather="chevron-right"></i></a></li>
-    </ul>
-</nav>
+<div class="demo-modal-btn">
+    <a href="javascript:void(0)" (click)="showMoreData()" class="btn btn-default">Show More</a>
+</div>

@@ -105,7 +105,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label>Category<span class="tx-danger">*</span></label>
-                <select class="form-control" multiple="multiple" [(ngModel)]="dataFood.categories" name="categories" required>
+                <select class="form-control" multiple="multiple" [(ngModel)]="dataFood.cateId" name="cateId" required>
                     <option *ngFor="let item of listCategory" [value]="item.id">{{item.name}}</option>
                 </select>
             </div>
