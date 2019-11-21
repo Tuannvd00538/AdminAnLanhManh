@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import axios from 'axios';
 import { environment } from '../../../../environments/environment';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
-import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,8 +12,7 @@ import Swal from 'sweetalert2';
 export class CreateSetComponent implements OnInit {
 
   constructor(
-    @Inject(LOCAL_STORAGE) private localStorage: any,
-    private toastr: ToastrService
+    @Inject(LOCAL_STORAGE) private localStorage: any
   ) { }
 
   listCategory: any = [];
@@ -106,7 +104,6 @@ export class CreateSetComponent implements OnInit {
           text: 'Something went wrong!'
         });
         that.isLoading = false;
-        that.toastr.error("Oops, someting went wrong", "Notification");
       });
     } else {
       Swal.fire({
