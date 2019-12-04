@@ -1,6 +1,6 @@
 <aside class="aside aside-fixed" *ngIf="isLogin">
   <div class="aside-header">
-    <a href="/" class="aside-logo">Admin<span>Panel</span></a>
+    <a href="/" class="aside-logo">ALM<span>Group</span></a>
     <a href="javascript:void(0)" class="aside-menu-link">
       <i data-feather="menu"></i>
       <i data-feather="x"></i>
@@ -9,10 +9,11 @@
   <div class="aside-body">
     <div class="aside-loggedin">
       <div class="d-flex align-items-center justify-content-start">
-        <a href="javascript:void(0)" class="avatar"><img src="https://i.imgur.com/1SbMW5W.png"
-            class="rounded-circle" alt=""></a>
+        <a href="javascript:void(0)" class="avatar"><img src="https://i.imgur.com/1SbMW5W.png" class="rounded-circle"
+            alt=""></a>
         <div class="aside-alert-link">
-          <a href="javascript:void(0)" (click)="logout()" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
+          <a href="javascript:void(0)" (click)="logout()" data-toggle="tooltip" title="Sign out"><i
+              data-feather="log-out"></i></a>
         </div>
       </div>
       <div class="aside-loggedin-user">
@@ -20,51 +21,59 @@
           <h6 class="tx-semibold mg-b-0">{{adminProfile?.name}}</h6>
           <i data-feather="chevron-down"></i>
         </a>
-        <p class="tx-color-03 tx-12 mg-b-0">Administrator</p>
+        <p class="tx-color-03 tx-12 mg-b-0">Quản trị viên</p>
       </div>
       <div class="collapse" id="loggedinMenu">
         <ul class="nav nav-aside mg-b-0">
-          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="edit"></i> <span>Edit Profile</span></a>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="edit"></i> <span>Chỉnh sửa
+                tài khoản</span></a>
           </li>
-          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="user"></i> <span>View Profile</span></a>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="user"></i> <span>Trang cá
+                nhân</span></a>
           </li>
-          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="settings"></i> <span>Account
-                Settings</span></a></li>
-          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="help-circle"></i> <span>Help
-                Center</span></a></li>
-          <li class="nav-item"><a href="javascript:void(0)" (click)="logout()" class="nav-link"><i data-feather="log-out"></i> <span>Sign Out</span></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="settings"></i> <span>Cài
+                đặt</span></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i data-feather="help-circle"></i>
+              <span>Trung tâm trợ giúp</span></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" (click)="logout()" class="nav-link"><i
+                data-feather="log-out"></i> <span>Đăng xuất</span></a></li>
         </ul>
       </div>
     </div><!-- aside-loggedin -->
     <ul class="nav nav-aside">
-      <li class="nav-label">Dashboard</li>
+      <li class="nav-label">Bảng điều khiển</li>
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
           [routerLink]="['']" class="nav-link"><i data-feather="shopping-bag"></i>
-          <span>Sales Monitoring</span></a></li>
+          <span>Thống kê</span></a></li>
 
-      <li class="nav-label mg-t-25">Food</li>
+      <li class="nav-label mg-t-25">Đồ Ăn</li>
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
           [routerLink]="['food/create']" class="nav-link"><i data-feather="activity"></i>
-          <span>Create</span></a></li>
+          <span>Tạo Mới</span></a></li>
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
           [routerLink]="['food/list']" class="nav-link"><i data-feather="layers"></i>
-          <span>List</span></a></li>
+          <span>Danh Sách Đồ Ăn</span></a></li>
 
-      <li class="nav-label mg-t-25">Set</li>
+      <li class="nav-label mg-t-25">Set Đồ Ăn</li>
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
           [routerLink]="['set/create']" class="nav-link"><i data-feather="activity"></i>
-          <span>Create</span></a></li>
+          <span>Tạo Mới</span></a></li>
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
           [routerLink]="['set/list']" class="nav-link"><i data-feather="layers"></i>
-          <span>List</span></a></li>
+          <span>Danh Sách Set Đồ Ăn</span></a></li>
 
-      <li class="nav-label mg-t-25">Category</li>
+      <li class="nav-label mg-t-25">Danh Mục</li>
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
           [routerLink]="['category/create']" class="nav-link"><i data-feather="activity"></i>
-          <span>Create</span></a></li>
+          <span>Tạo Mới</span></a></li>
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
           [routerLink]="['category/list']" class="nav-link"><i data-feather="layers"></i>
-          <span>List</span></a></li>
+          <span>Danh Sách Danh Mục</span></a></li>
+
+      <li class="nav-label mg-t-25">Đơn Hàng</li>
+      <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
+          [routerLink]="['order/list']" class="nav-link"><i data-feather="layers"></i>
+          <span>Quản Lý Đơn Hàng</span></a></li>
     </ul>
   </div>
 </aside>
@@ -73,7 +82,7 @@
   <div class="content-header">
     <div class="content-search">
       <i data-feather="search"></i>
-      <input type="search" class="form-control" placeholder="Search...">
+      <input type="search" class="form-control" placeholder="Tìm kiếm...">
     </div>
     <nav class="nav">
       <a href="javascript:void(0)" class="nav-link"><i data-feather="help-circle"></i></a>
@@ -82,7 +91,7 @@
     </nav>
   </div><!-- content-header -->
 
-  <div class="content-body">
+  <div class="content-body pd-0">
 
     <router-outlet></router-outlet>
 

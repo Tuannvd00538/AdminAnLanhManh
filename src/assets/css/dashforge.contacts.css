@@ -109,7 +109,6 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 55px;
   right: 0; }
   @media (min-width: 480px) {
     .contact-sidebar {
@@ -118,8 +117,7 @@
       border-right: 1px solid rgba(72, 94, 144, 0.16); } }
   @media (min-width: 992px) {
     .contact-sidebar {
-      width: 265px;
-      left: 60px; } }
+      width: 265px; } }
   @media (min-width: 1200px) {
     .contact-sidebar {
       width: 280px; } }
@@ -247,13 +245,13 @@
       transform: translateX(320px); } }
   @media (min-width: 992px) {
     .contact-content {
-      left: 325px;
+      left: 265px;
       transform: none;
       visibility: visible;
       opacity: 1; } }
   @media (min-width: 1200px) {
     .contact-content {
-      left: 340px; } }
+      left: 280px; } }
 
 .contact-content-header {
   background-color: #fff;

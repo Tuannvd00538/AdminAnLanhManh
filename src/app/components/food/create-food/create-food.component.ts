@@ -38,7 +38,7 @@ export class CreateFoodComponent implements OnInit {
     vitaminD: null,
     vitaminE: null,
     calorie: null,
-    cateId: null
+    categoryIds: null
   };
 
   isLoading: boolean = false;
@@ -84,11 +84,11 @@ export class CreateFoodComponent implements OnInit {
       if (this.editMode) {
         axios.put(`${environment.api_url}/api/food/update/${this.foodId}`, that.dataFood, { headers: { Authorization: that.token } }).then(function (response) {
           Swal.fire({
-            title: 'Food updated.',
+            title: 'Lưu món ăn thành công',
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Done'
+            confirmButtonText: 'Xong'
           }).then((result) => {
             if (result.value) {
               window.location.href = '/food/list';
@@ -99,7 +99,7 @@ export class CreateFoodComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!'
+            text: 'Có lỗi xảy ra!'
           });
           that.isLoading = false;
           console.log(error);
@@ -108,11 +108,11 @@ export class CreateFoodComponent implements OnInit {
         axios.post(`${environment.api_url}/api/food/create`, that.dataFood, { headers: { Authorization: that.token } }).then(function (response) {
           that.isLoading = false;
           Swal.fire({
-            title: 'Food created.',
+            title: 'Lưu món ăn thành công',
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Done'
+            confirmButtonText: 'Xong'
           }).then((result) => {
             if (result.value) {
               window.location.href = '/food/list';
@@ -123,7 +123,7 @@ export class CreateFoodComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!'
+            text: 'Có lỗi xảy ra!'
           });
           that.isLoading = false;
           console.log(error);
@@ -132,7 +132,7 @@ export class CreateFoodComponent implements OnInit {
     } else {
       Swal.fire({
         icon: 'error',
-        title: 'All field is required',
+        title: 'Vui lòng kiểm tra lại tất cả các trường còn thiếu',
         text: 'Oops...'
       });
       that.isLoading = false;
@@ -145,7 +145,12 @@ export class CreateFoodComponent implements OnInit {
   getFoodById(url) {
     const that = this;
     axios.get(url).then(function (response) {
+      response.data.data.categoryIds = response.data.data.categories.map(cate => {
+        return cate.id;
+      });
       that.dataFood = response.data.data;
+      console.log(that.dataFood);
+      
     }).catch(function (error) {
       console.log(error);
     });

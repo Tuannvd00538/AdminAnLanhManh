@@ -3,6 +3,7 @@ import axios from 'axios';
 import { environment } from '../../../../environments/environment';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-set',
@@ -12,14 +13,14 @@ import Swal from 'sweetalert2';
 export class CreateSetComponent implements OnInit {
 
   constructor(
-    @Inject(LOCAL_STORAGE) private localStorage: any
+    @Inject(LOCAL_STORAGE) private localStorage: any,
+    private route: ActivatedRoute
   ) { }
 
   listCategory: any = [];
 
   dataSet: any = {
     name: null,
-    price: null,
     description: null,
     categoryIds: null,
     foodIds: null
@@ -63,7 +64,7 @@ export class CreateSetComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!'
+          text: 'Có lỗi xảy ra'
         });
         that.dataSet.image = null;
         that.isLoading = false;
@@ -83,41 +84,89 @@ export class CreateSetComponent implements OnInit {
       if (this.dataSet[key] == null) check = false;
     }
     if (check) {
-      axios.post(`${environment.api_url}/api/combo/create`, that.dataSet, { headers: { Authorization: that.token } }).then(function (response) {
-        Swal.fire({
-          title: 'Set created.',
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Done'
-        }).then((result) => {
-          if (result.value) {
-            window.location.href = '/set/list';
-          }
+      if (this.editMode) {
+        axios.put(`${environment.api_url}/api/combo/update/${this.setId}`, that.dataSet, { headers: { Authorization: that.token } }).then(function (response) {
+          Swal.fire({
+            title: 'Lưu set đồ ăn thành công',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Xong'
+          }).then((result) => {
+            if (result.value) {
+              window.location.href = '/set/list';
+            }
+          })
+          that.isLoading = false;
+        }).catch(function (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Có lỗi xảy ra!'
+          });
+          that.isLoading = false;
+          console.log(error);
         });
-        that.isLoading = false;
-      }).catch(function (error) {
-        console.log(error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!'
+      } else {
+        axios.post(`${environment.api_url}/api/combo/create`, that.dataSet, { headers: { Authorization: that.token } }).then(function (response) {
+          Swal.fire({
+            title: 'Tạo set đồ ăn thành công',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Xong'
+          }).then((result) => {
+            if (result.value) {
+              window.location.href = '/set/list';
+            }
+          });
+          that.isLoading = false;
+        }).catch(function (error) {
+          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Có lỗi xảy ra'
+          });
+          that.isLoading = false;
         });
-        that.isLoading = false;
-      });
+      }
     } else {
       Swal.fire({
         icon: 'error',
-        title: 'All field is required',
+        title: 'Vui lòng kiểm tra lại các trường còn trống',
         text: 'Oops...'
       });
       that.isLoading = false;
     }
   }
 
+  setId: any = null;
+  editMode: boolean = false;
+
+  getSetById(url) {
+    const that = this;
+    axios.get(url).then(function (response) {
+      response.data.data.categoryIds = response.data.data.categories.map(cate => {
+        return cate.id;
+      });
+      response.data.data.foodIds = response.data.data.foods.map(food => {
+        return food.id;
+      });
+      that.dataSet = response.data.data;
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+
   ngOnInit() {
     this.getListCategory(`${environment.api_url}/api/category`);
-    this.getListFood(`${environment.api_url}/api/food/list`);
+    this.getListFood(`${environment.api_url}/api/food/list?limit=1000`);
+    this.setId = this.route.snapshot.queryParamMap.get('setId');
+    if (this.setId != null) {
+      this.editMode = true;
+      this.getSetById(`${environment.api_url}/api/combo/${this.setId}`);
+    }
   }
 
 }

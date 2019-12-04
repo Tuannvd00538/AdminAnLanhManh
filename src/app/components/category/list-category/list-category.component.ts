@@ -28,6 +28,24 @@ export class ListCategoryComponent implements OnInit {
     });
   }
 
+  isLoading: boolean = false;
+
+  showMoreData() {
+    const that = this;
+    if (this.isLoading) return;
+    this.isLoading = true;
+    this.currentPage = this.currentPage + 1;
+    axios.get(`${environment.api_url}/api/category/list?page=${this.currentPage}`).then(function (response) {
+      const newArray = [...that.listCategory.data, ...response.data.data];
+      that.listCategory.data = newArray;
+      that.listCategory.restPagination = response.data.restPagination;
+      that.isLoading = false;
+    }).catch(function (error) {
+      that.isLoading = false;
+      console.log(error);
+    });
+  }
+
   token: any = this.localStorage.getItem('token');
 
   deleteCategory(id) {
@@ -60,8 +78,10 @@ export class ListCategoryComponent implements OnInit {
     })
   }
 
+  currentPage: any = 1;
+
   ngOnInit() {
-    this.getListCategory(`${environment.api_url}/api/category`);
+    this.getListCategory(`${environment.api_url}/api/category/list?page=${this.currentPage}`);
   }
 
 }

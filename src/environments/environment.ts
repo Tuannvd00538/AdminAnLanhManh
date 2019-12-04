@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://localhost:9000'
+  api_url: 'http://sv.anlanhmanh.com',
+  client_url: 'http://anlanhmanh.com'
 };
 
 /*

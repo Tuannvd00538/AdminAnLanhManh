@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListOrderComponent } from './components/order/list-order/list-order.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CreateFoodComponent,
     ListSetComponent,
     CreateSetComponent,
-    LoginComponent
+    LoginComponent,
+    ListOrderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

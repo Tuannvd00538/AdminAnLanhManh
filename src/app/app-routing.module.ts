@@ -9,6 +9,7 @@ import { CreateCategoryComponent } from './components/category/create-category/c
 import { ListCategoryComponent } from './components/category/list-category/list-category.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthGuardService } from './service/auth-guard.service';
+import { ListOrderComponent } from './components/order/list-order/list-order.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'set/list', component: ListSetComponent, canActivate: [AuthGuardService] },
   { path: 'category/create', component: CreateCategoryComponent, canActivate: [AuthGuardService] },
   { path: 'category/list', component: ListCategoryComponent, canActivate: [AuthGuardService] },
+  { path: 'order/list', component: ListOrderComponent, canActivate: [AuthGuardService] },
   { path: 'auth/login', component: LoginComponent },
   { path: '**', component: MainComponent, canActivate: [AuthGuardService] }
 ];

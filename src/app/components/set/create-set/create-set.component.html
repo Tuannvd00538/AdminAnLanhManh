@@ -1,60 +1,59 @@
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb mg-b-0">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Create Set</li>
-    </ol>
-</nav>
-<div data-label="Add Food" class="df-example demo-forms mt-4">
-    <form data-parsley-validate (ngSubmit)="saveSet($event)">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="nameFood">Name<span class="tx-danger">*</span></label>
-                <input required type="text" class="form-control" id="nameFood" placeholder="Name"
-                    [(ngModel)]="dataSet.name" name="name">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="priceFood">Price<span class="tx-danger">*</span></label>
-                <input required type="number" class="form-control" id="priceFood" placeholder="5"
-                    [(ngModel)]="dataSet.price" name="price">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="descriptionFood">Description<span class="tx-danger">*</span></label>
-            <textarea class="form-control" id="descriptionFood" rows="2" placeholder="Description"
-                [(ngModel)]="dataSet.description" name="description" required></textarea>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Food<span class="tx-danger">*</span></label>
-                <select class="form-control" multiple="multiple" [(ngModel)]="dataSet.foodIds" name="foodIds" required>
-                    <option *ngFor="let item of listFood" [value]="item.id">{{item.name}}</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Category<span class="tx-danger">*</span></label>
-                <select class="form-control" multiple="multiple" [(ngModel)]="dataSet.categoryIds" name="categoryIds"
-                    required>
-                    <option *ngFor="let item of listCategory" [value]="item.id">{{item.name}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="thumbnail">Thumbnaill<span class="tx-danger">*</span></label>
-                <div class="custom-file">
-                    <input required type="file" class="custom-file-input" id="thumbnail" (change)="fileChange($event)">
-                    <label class="custom-file-label"
-                        for="thumbnail">{{(dataSet.image == null) ? 'Choose file' : dataSet.image}}</label>
+<div class="pd-20">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mg-b-0">
+            <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tạo Set Đồ Ăn</li>
+        </ol>
+    </nav>
+    <div data-label="Tạo Set Đồ Ăn" class="df-example demo-forms mt-4">
+        <form data-parsley-validate (ngSubmit)="saveSet($event)">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="nameFood">Tên<span class="tx-danger">*</span></label>
+                    <input required type="text" class="form-control" id="nameFood" placeholder="Name"
+                        [(ngModel)]="dataSet.name" name="name">
                 </div>
             </div>
-            <div class="form-group col-md-3" *ngIf="dataSet.image != null">
-                <label for="preview">Preview Thumbnail</label>
-                <img id="preview" [src]="dataSet.image" width="100%" height="auto">
+            <div class="form-group">
+                <label for="descriptionFood">Mô Tả<span class="tx-danger">*</span></label>
+                <textarea class="form-control" id="descriptionFood" rows="2" placeholder="Description"
+                    [(ngModel)]="dataSet.description" name="description" required></textarea>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-        <div class="spinner-border pos-absolute mg-l-5" role="status" *ngIf="isLoading">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </form>
-</div><!-- df-example -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Món Ăn (chọn nhiều)<span class="tx-danger">*</span></label>
+                    <select class="form-control" multiple="multiple" [(ngModel)]="dataSet.foodIds" name="foodIds"
+                        required>
+                        <option *ngFor="let item of listFood" [value]="item.id">{{item.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Danh Mục (có thể chọn nhiều)<span class="tx-danger">*</span></label>
+                    <select class="form-control" multiple="multiple" [(ngModel)]="dataSet.categoryIds"
+                        name="categoryIds" required>
+                        <option *ngFor="let item of listCategory" [value]="item.id">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="thumbnail">Ảnh<span class="tx-danger">*</span></label>
+                    <div class="custom-file">
+                        <input required type="file" class="custom-file-input" id="thumbnail"
+                            (change)="fileChange($event)">
+                        <label class="custom-file-label"
+                            for="thumbnail">{{(dataSet.image == null) ? 'Choose file' : dataSet.image}}</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-3" *ngIf="dataSet.image != null">
+                    <label for="preview">Xem Trước Ảnh</label>
+                    <img id="preview" [src]="dataSet.image" width="100%" height="auto">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">{{editMode ? 'Cập Nhật' : 'Lưu'}}</button>
+            <div class="spinner-border pos-absolute mg-l-5" role="status" *ngIf="isLoading">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </form>
+    </div><!-- df-example -->
+</div>

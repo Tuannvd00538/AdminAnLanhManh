@@ -1,29 +1,37 @@
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb mg-b-0">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">List Category</li>
-    </ol>
-</nav>
-<div class="table-responsive mt-4">
-    <table class="table table-bordered mg-b-0">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Parent</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of listCategory.data">
-                <th scope="row">{{item.id}}</th>
-                <td>{{item.name}}</td>
-                <td>{{item.parentId}}</td>
-                <td>
-                    <a href="/category/create?cateId={{item.id}}" class="mg-r-5">Edit</a>
-                    <a href="javascript:void(0)" (click)="deleteCategory(item.id)" class="text-danger">Delete</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div><!-- table-responsive -->
+<div class="pd-20">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mg-b-0">
+            <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Danh Sách Danh Mục</li>
+        </ol>
+    </nav>
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th scope="col" width="5%">ID</th>
+                    <th scope="col" width="35%">Tên</th>
+                    <th scope="col" width="50%">Mô Tả</th>
+                    <th scope="col" width="10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listCategory.data">
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.name}}</td>
+                    <td>{{item.description}}</td>
+                    <td>
+                        <a href="/category/create?cateId={{item.id}}" class="mg-r-5">Sửa</a>
+                        <a href="javascript:void(0)" (click)="deleteCategory(item.id)" class="text-danger">Xóa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- table-responsive -->
+    <div class="demo-modal-btn" *ngIf="listCategory?.restPagination?.page != listCategory?.restPagination?.totalPages">
+        <a href="javascript:void(0)" (click)="showMoreData()" class="btn btn-default" *ngIf="!isLoading">Xem Thêm</a>
+        <div class="spinner-border" role="status" *ngIf="isLoading">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
