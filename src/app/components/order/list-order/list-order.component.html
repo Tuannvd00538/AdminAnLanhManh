@@ -10,96 +10,12 @@
             <div class="tab-content">
                 <div id="tabContact" class="tab-pane fade active show">
                     <div class="pd-y-20 pd-x-10 contact-list">
-                        <div class="media">
+                        <div class="media" *ngFor="let item of orderList" (click)="orderDetail = item">
                             <div class="avatar avatar-sm avatar-online"><span
                                     class="avatar-initial rounded-circle bg-gray-700">A</span></div>
                             <div class="media-body mg-l-10">
-                                <h6 class="tx-13 mg-b-3">Abigail Johnson</h6>
-                                <span class="tx-12">+1-234-567-890</span>
-                            </div><!-- media-body -->
-                            <nav>
-                                <a href=""><i data-feather="star"></i></a>
-                                <a href=""><i data-feather="edit-2"></i></a>
-                            </nav>
-                        </div><!-- media -->
-                        <div class="media">
-                            <div class="avatar avatar-sm avatar-online"><span
-                                    class="avatar-initial rounded-circle bg-primary">a</span></div>
-                            <div class="media-body mg-l-10">
-                                <h6 class="tx-13 mg-b-3">Allan Rey Palban</h6>
-                                <span class="tx-12">allanr@palban.com</span>
-                            </div><!-- media-body -->
-                            <nav>
-                                <a href=""><i data-feather="star"></i></a>
-                                <a href=""><i data-feather="edit-2"></i></a>
-                            </nav>
-                        </div><!-- media -->
-                        <div class="media">
-                            <div class="avatar avatar-sm avatar-offline"><span
-                                    class="avatar-initial rounded-circle bg-info">a</span></div>
-                            <div class="media-body mg-l-10">
-                                <h6 class="tx-13 mg-b-3">Aileen Mante</h6>
-                                <span class="tx-12">+1-234-567-890</span>
-                            </div><!-- media-body -->
-                            <nav>
-                                <a href=""><i data-feather="star"></i></a>
-                                <a href=""><i data-feather="edit-2"></i></a>
-                            </nav>
-                        </div><!-- media -->
-                        <div class="media">
-                            <div class="avatar avatar-sm avatar-online"><span
-                                    class="avatar-initial rounded-circle bg-indigo">B</span></div>
-                            <div class="media-body mg-l-10">
-                                <h6 class="tx-13 mg-b-3">Brandibelle Yap</h6>
-                                <span class="tx-12">byap@urmail.com</span>
-                            </div><!-- media-body -->
-                            <nav>
-                                <a href=""><i data-feather="star"></i></a>
-                                <a href=""><i data-feather="edit-2"></i></a>
-                            </nav>
-                        </div><!-- media -->
-                        <div class="media">
-                            <div class="avatar avatar-sm avatar-online"><span
-                                    class="avatar-initial rounded-circle bg-gray-800">B</span></div>
-                            <div class="media-body mg-l-10">
-                                <h6 class="tx-13 mg-b-3">Brejette Bunggay</h6>
-                                <span class="tx-12">+1-234-567-890</span>
-                            </div><!-- media-body -->
-                            <nav>
-                                <a href=""><i data-feather="star"></i></a>
-                                <a href=""><i data-feather="edit-2"></i></a>
-                            </nav>
-                        </div><!-- media -->
-                        <div class="media">
-                            <div class="avatar avatar-sm avatar-offline"><span
-                                    class="avatar-initial rounded-circle bg-primary">D</span></div>
-                            <div class="media-body mg-l-10">
-                                <h6 class="tx-13 mg-b-3">Daniel Calinawan</h6>
-                                <span class="tx-12">daniel@youremail.com</span>
-                            </div><!-- media-body -->
-                            <nav>
-                                <a href=""><i data-feather="star"></i></a>
-                                <a href=""><i data-feather="edit-2"></i></a>
-                            </nav>
-                        </div><!-- media -->
-                        <div class="media">
-                            <div class="avatar avatar-sm avatar-offline"><span
-                                    class="avatar-initial rounded-circle bg-success">E</span></div>
-                            <div class="media-body mg-l-10">
-                                <h6 class="tx-13 mg-b-3">Elvis Vircede</h6>
-                                <span class="tx-12">+63929-123-4567</span>
-                            </div><!-- media-body -->
-                            <nav>
-                                <a href=""><i data-feather="star"></i></a>
-                                <a href=""><i data-feather="edit-2"></i></a>
-                            </nav>
-                        </div><!-- media -->
-                        <div class="media">
-                            <div class="avatar avatar-sm avatar-online"><span
-                                    class="avatar-initial rounded-circle bg-gray-700">E</span></div>
-                            <div class="media-body mg-l-10">
-                                <h6 class="tx-13 mg-b-3">Elena Salubre</h6>
-                                <span class="tx-12">e.salubre@myemail.com</span>
+                                <h6 class="tx-13 mg-b-3">{{item?.userName}}</h6>
+                                <span class="tx-12">{{item?.address}}</span>
                             </div><!-- media-body -->
                             <nav>
                                 <a href=""><i data-feather="star"></i></a>
@@ -115,16 +31,18 @@
     <div class="contact-content">
         <div class="contact-content-header">
             <nav class="nav">
-                <a href="#contactInformation" class="nav-link active" data-toggle="tab">Contact
-                    Info<span>rmation</span></a>
+                <a href="javascript:void(0)" class="nav-link active">Order {{(orderDetail?.code) ? '#' + orderDetail?.code : ''}}</a>
             </nav>
         </div><!-- contact-content-header -->
 
         <div class="contact-content-body">
-            <div class="tab-content">
+            <div class="tab-content no-data" *ngIf="orderDetail == null">
+                No order data
+            </div>
+            <div class="tab-content" *ngIf="orderDetail">
                 <div id="contactInformation" class="tab-pane show active pd-20 pd-xl-25">
                     <div class="d-flex align-items-center justify-content-between mg-b-25">
-                        <h6 class="mg-b-0">Personal Details</h6>
+                        <h6 class="mg-b-0">Ship Details</h6>
                         <div class="d-flex">
                             <a href="#modalEditContact" data-toggle="modal"
                                 class="btn btn-sm btn-white d-flex align-items-center mg-r-5"><i
@@ -138,22 +56,22 @@
                     <div class="row">
                         <div class="col-6 col-sm">
                             <label
-                                class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Firstname</label>
-                            <p class="mg-b-0">Abigail</p>
+                                class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Username</label>
+                            <p class="mg-b-0">{{orderDetail?.userName}}</p>
                         </div><!-- col -->
                         <div class="col-6 col-sm">
                             <label
-                                class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Middlename</label>
-                            <p class="mg-b-0">Christensen</p>
+                                class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Address</label>
+                            <p class="mg-b-0">{{orderDetail?.address}}</p>
                         </div><!-- col -->
                         <div class="col-sm mg-t-20 mg-sm-t-0">
                             <label
-                                class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Lastname</label>
-                            <p class="mg-b-0">Johnson</p>
+                                class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Phone</label>
+                            <p class="mg-b-0">{{orderDetail?.phone}}</p>
                         </div><!-- col -->
                     </div><!-- row -->
 
-                    <h6 class="mg-t-40 mg-b-20">Contact Details</h6>
+                    <h6 class="mg-t-40 mg-b-20">Order Details</h6>
 
                     <div class="row row-sm">
                         <div class="col-6 col-sm-4">
