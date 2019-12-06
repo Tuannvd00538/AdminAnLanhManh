@@ -9,26 +9,25 @@
             </div><!-- media-body -->
             <div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">
                 <div class="wd-100p">
-                    <h3 class="tx-color-01 mg-b-5">Sign In</h3>
-                    <p class="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
+                    <h3 class="tx-color-01 mg-b-5">Đăng Nhập</h3>
+                    <p class="tx-color-03 tx-16 mg-b-40">Để tiếp tục vào trang quản trị <strong>AnLanhManh</strong>, bạn vui lòng đăng nhập!</p>
                     <div class="alert alert-solid alert-danger" role="alert" *ngIf="textError != null">
                         {{textError}}
                     </div>
                     <div class="form-group">
-                        <label>Account</label>
-                        <input type="text" #account (keyup.enter)="login(account.value, password.value)" class="form-control" placeholder="Username or phone">
+                        <label>Tài khoản</label>
+                        <input type="text" #account (keyup.enter)="login(account.value, password.value)" class="form-control" placeholder="Tài khoản hoặc số điện thoại">
                     </div>
                     <div class="form-group">
                         <div class="d-flex justify-content-between mg-b-5">
-                            <label class="mg-b-0-f">Password</label>
-                            <a href="javascript:void(0)" class="tx-13">Forgot password?</a>
+                            <label class="mg-b-0-f">Mật khẩu</label>
+                            <a href="javascript:void(0)" class="tx-13">Quên mật khẩu?</a>
                         </div>
                         <input type="password" #password (keyup.enter)="login(account.value, password.value)" class="form-control" placeholder="Enter your password">
                     </div>
-                    <button class="btn btn-brand-02 btn-block" (click)="login(account.value, password.value)">Sign
-                        In</button>
-                    <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a
-                            href="https://www.facebook.com/TuanMinPay" target="_blank">Contact admin to create</a></div>
+                    <button class="btn btn-brand-02 btn-block" (click)="login(account.value, password.value)">Đăng Nhập</button>
+                    <div class="tx-13 mg-t-20 tx-center">Bạn chưa có tài khoản? <a
+                            href="https://www.facebook.com/TuanMinPay" target="_blank">Liên hệ admin để tạo tài khoản</a></div>
                 </div>
             </div><!-- sign-wrapper -->
         </div><!-- media -->
