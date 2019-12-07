@@ -51,7 +51,13 @@ export class ListOrderComponent implements OnInit {
   }
 
   confirmOrder(order) {
-    alert("Đợi api :)");
+    const that = this;
+    axios.put(`${environment.api_url}/api/order/${order.id}?status=3`, null,{ headers: { Authorization: that.token } }).then((response) => {
+      that.orderDetail.status = 3;
+      console.log(response.data);
+    }).catch((err) => {
+      console.log(err);
+    })
   }
 
   searchOrder(code) {
@@ -61,7 +67,7 @@ export class ListOrderComponent implements OnInit {
     }).catch((err) => {
       that.isLoading = false;
       console.log(err);
-    })
+    });
   }
 
   salesReport: any = null;

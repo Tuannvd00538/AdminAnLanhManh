@@ -57,4 +57,16 @@ export class UtilService {
   getTotalPrice(arr: { reduce: (arg0: (a: any, b: any) => number, arg1: number) => void; }) {
     return arr.reduce((a, b) => parseInt(a) + (parseInt(b.totalPrice)), 0)
   }
+
+  timeFrom(X: number) {
+    var dates = [];
+    for (let I = 0; I < Math.abs(X); I++) {
+      dates.push(new Date(new Date().getTime() - ((X >= 0 ? I : (I - I - I)) * 24 * 60 * 60 * 1000)).toLocaleString());
+    }
+    return dates.map((date) => {
+      date = date.split(', ')[0];
+      let objDate = date.split('/');
+      return `${objDate[2]}-${objDate[0]}-${('0' + objDate[1]).slice(-2)}`;
+    }).reverse();
+  }
 }

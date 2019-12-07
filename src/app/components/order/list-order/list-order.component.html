@@ -113,6 +113,8 @@
 
                         </div>
 
+                        <p>Tổng tiền: <strong>{{util.formatPrice(orderDetail.totalPrice)}}</strong></p>
+
                         <button class="btn btn-success" *ngIf="orderDetail?.status &lt; 3"
                             (click)="confirmOrder(orderDetail)">Xác Nhận Giao Hàng</button>
                     </div>
