@@ -11,3 +11,7 @@
     height: 100%;
     overflow: auto;
 }
+
+.contact-content-body .tab-pane > .row {
+    max-width: 100%!important;
+}
