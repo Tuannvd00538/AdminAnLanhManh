@@ -22,6 +22,23 @@ export class ListOrderComponent implements OnInit {
 
   orderDetail: any = null;
 
+  getStatus(status: any) {
+    switch (status) {
+      case 1:
+        return;
+      case 2:
+        return;
+      case 3:
+        return;
+      case 4:
+        return;
+      case 5:
+        return;
+      default:
+        break;
+    }
+  }
+
   ngOnInit() {
     const that = this;
     if (this.token == null || this.token == undefined) {

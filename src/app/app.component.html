@@ -70,6 +70,14 @@
           [routerLink]="['category/list']" class="nav-link"><i data-feather="layers"></i>
           <span>Danh Sách Danh Mục</span></a></li>
 
+          <li class="nav-label mg-t-25">Lộ Trình Ăn Uống</li>
+      <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
+          [routerLink]="['schedule/create']" class="nav-link"><i data-feather="activity"></i>
+          <span>Tạo Mới</span></a></li>
+      <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
+          [routerLink]="['schedule/list']" class="nav-link"><i data-feather="layers"></i>
+          <span>Danh Sách Lộ Trình</span></a></li>
+
       <li class="nav-label mg-t-25">Đơn Hàng</li>
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
           [routerLink]="['order/list']" class="nav-link"><i data-feather="layers"></i>
