@@ -10,6 +10,8 @@ import { ListCategoryComponent } from './components/category/list-category/list-
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { ListOrderComponent } from './components/order/list-order/list-order.component';
+import { CreateScheduleComponent } from './components/schedule/create-schedule/create-schedule.component';
+import { ListScheduleComponent } from './components/schedule/list-schedule/list-schedule.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'category/list', component: ListCategoryComponent, canActivate: [AuthGuardService] },
   { path: 'order/list', component: ListOrderComponent, canActivate: [AuthGuardService] },
   { path: 'auth/login', component: LoginComponent },
+  { path: 'schedule/create', component: CreateScheduleComponent, canActivate: [AuthGuardService] },
+  { path: 'schedule/list', component: ListScheduleComponent, canActivate: [AuthGuardService] },
   { path: '**', component: MainComponent, canActivate: [AuthGuardService] }
 ];
 

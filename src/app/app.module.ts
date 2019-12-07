@@ -20,6 +20,8 @@ import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListOrderComponent } from './components/order/list-order/list-order.component';
+import { CreateScheduleComponent } from './components/schedule/create-schedule/create-schedule.component';
+import { ListScheduleComponent } from './components/schedule/list-schedule/list-schedule.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ListOrderComponent } from './components/order/list-order/list-order.com
     ListSetComponent,
     CreateSetComponent,
     LoginComponent,
-    ListOrderComponent
+    ListOrderComponent,
+    CreateScheduleComponent,
+    ListScheduleComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
