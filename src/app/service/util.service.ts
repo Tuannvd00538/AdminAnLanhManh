@@ -53,4 +53,8 @@ export class UtilService {
       return `${str}-${id}.html`;
     }
   };
+
+  getTotalPrice(arr: { reduce: (arg0: (a: any, b: any) => number, arg1: number) => void; }) {
+    return arr.reduce((a, b) => parseInt(a) + (parseInt(b.totalPrice)), 0)
+  }
 }

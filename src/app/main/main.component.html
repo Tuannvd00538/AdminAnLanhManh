@@ -140,79 +140,22 @@
         <div class="col-md-6 col-xl-6 mg-t-10">
             <div class="card ht-100p">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h6 class="mg-b-0">Lịch Sử Giao Dịch</h6>
-                    <div class="d-flex tx-18">
-                        <a href="" class="link-03 lh-0"><i class="icon ion-md-refresh"></i></a>
-                        <a href="" class="link-03 lh-0 mg-l-10"><i class="icon ion-md-more"></i></a>
-                    </div>
+                    <h6 class="mg-b-0">Giao dịch gần nhất</h6>
                 </div>
                 <ul class="list-group list-group-flush tx-13">
-                    <li class="list-group-item d-flex pd-sm-x-20">
-                        <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-teal"><i
-                                    class="icon ion-md-checkmark"></i></span></div>
+                    <li class="list-group-item d-flex pd-sm-x-20"*ngFor="let item of orderList | slice:0:6">
+                        <div class="avatar d-none d-sm-block" [innerHTML]="getStatusOrder(item.status)">
+
+                        </div>
                         <div class="pd-sm-l-10">
-                            <p class="tx-medium mg-b-0">Thanh toán đơn hàng #10322</p>
-                            <small class="tx-12 tx-color-03 mg-b-0">Dec 04, 2019, 3:30pm</small>
+                            <p class="tx-medium mg-b-0">Đơn hàng #{{item.code}}</p>
+                            <small class="tx-12 tx-color-03 mg-b-0">{{item.createdAt}}</small>
                         </div>
                         <div class="mg-l-auto text-right">
-                            <p class="tx-medium mg-b-0">+ $250.00</p>
-                            <small class="tx-12 tx-success mg-b-0">Hoàn Thành</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex pd-sm-x-20">
-                        <div class="avatar d-none d-sm-block"><span
-                                class="avatar-initial rounded-circle bg-indigo op-5"><i
-                                    class="icon ion-md-return-left"></i></span></div>
-                        <div class="pd-sm-l-10">
-                            <p class="tx-medium mg-b-2">Hoàn tiền đơn hàng #00910</p>
-                            <small class="tx-12 tx-color-03 mg-b-0">Dec 03, 2019, 1:00pm</small>
-                        </div>
-                        <div class="mg-l-auto text-right">
-                            <p class="tx-medium mg-b-2">-$16.50</p>
-                            <small class="tx-12 tx-success mg-b-0">Hoàn Thành</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex pd-sm-x-20">
-                        <div class="avatar d-none d-sm-block"><span
-                                class="avatar-initial rounded-circle bg-orange op-5"><i
-                                    class="icon ion-md-bus"></i></span></div>
-                        <div class="pd-sm-l-10">
-                            <p class="tx-medium mg-b-2">Đang giao đơn hàng #44333</p>
-                            <small class="tx-12 tx-color-03 mg-b-0">Dec 02, 2019, 11:40am</small>
-                        </div>
-                        <div class="mg-l-auto text-right">
-                            <p class="tx-medium mg-b-2">3 Sản Phẩm</p>
-                            <small class="tx-12 tx-info mg-b-0">Chờ Thanh Toán</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex pd-sm-x-20">
-                        <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-teal"><i
-                                    class="icon ion-md-checkmark"></i></span></div>
-                        <div class="pd-sm-l-10">
-                            <p class="tx-medium mg-b-0">Thanh toán đơn hàng #023328</p>
-                            <small class="tx-12 tx-color-03 mg-b-0">Dec 01, 2019, 10:30pm</small>
-                        </div>
-                        <div class="mg-l-auto text-right">
-                            <p class="tx-medium mg-b-0">+ $129.50</p>
-                            <small class="tx-12 tx-success mg-b-0">Hoàn Thành</small>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex pd-sm-x-20">
-                        <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-gray-400"><i
-                                    class="icon ion-md-close"></i></span></div>
-                        <div class="pd-sm-l-10">
-                            <p class="tx-medium mg-b-0">Thanh toán thất bại đơn hàng #087651</p>
-                            <small class="tx-12 tx-color-03 mg-b-0">Nov 30, 2019, 12:54pm</small>
-                        </div>
-                        <div class="mg-l-auto text-right">
-                            <p class="tx-medium mg-b-0">$150.00</p>
-                            <small class="tx-12 tx-danger mg-b-0">Thất Bại</small>
+                            <p class="tx-medium mg-b-0">{{util.formatPrice(item.totalPrice)}}</p>
                         </div>
                     </li>
                 </ul>
-                <div class="card-footer text-center tx-13">
-                    <a href="" class="link-03">Xem Thêm <i class="icon ion-md-arrow-down mg-l-5"></i></a>
-                </div><!-- card-footer -->
             </div><!-- card -->
         </div>
         <div class="col-md-6 col-xl-6 mg-t-10">

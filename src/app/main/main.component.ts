@@ -1,5 +1,8 @@
 import { Component, OnInit, Inject, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { environment } from '../../environments/environment';
+import { UtilService } from '../service/util.service';
+import axios from 'axios';
 
 @Component({
   selector: 'app-main',
@@ -10,8 +13,13 @@ export class MainComponent implements OnInit {
 
   constructor(
     private _renderer2: Renderer2,
+    public util: UtilService,
     @Inject(DOCUMENT) private _document: Document
   ) { }
+
+  token: string = localStorage.getItem('token');
+
+  orderList: any = [];
 
   ngOnInit() {
     let script = this._renderer2.createElement('script');
@@ -190,6 +198,35 @@ export class MainComponent implements OnInit {
     })`;
 
     this._renderer2.appendChild(this._document.body, script);
+
+    const that = this;
+    if (this.token == null || this.token == undefined) {
+      window.location.href = '/auth/login';
+      return;
+    }
+    axios.get(`${environment.api_url}/api/order`, { headers: { Authorization: that.token } }).then((response) => {
+      that.orderList = response.data.data;
+      console.log(response.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  getStatusOrder(status) {
+    switch (status) {
+      case 1:
+        return `<span class="avatar-initial rounded-circle bg-teal"><i class="icon ion-md-checkmark"></i></span>`;
+      case 2:
+        return `<span class="avatar-initial rounded-circle bg-teal"><i class="icon ion-md-checkmark"></i></span>`;
+      case 3:
+        return `<span class="vatar-initial rounded-circle bg-orange op-5"><i class="icon ion-md-bus"></i></span>`;
+      case 4:
+        return `<span class="avatar-initial rounded-circle bg-teal"><i class="icon ion-md-checkmark"></i></span>`;
+      case 5:
+        return `<span class="avatar-initial rounded-circle bg-gray-400"><i class="icon ion-md-close"></i></span>`;
+      default:
+        break;
+    }
   }
 
 }

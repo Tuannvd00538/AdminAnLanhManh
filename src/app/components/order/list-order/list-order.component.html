@@ -3,18 +3,24 @@
         <div class="contact-sidebar-header">
             <i data-feather="search"></i>
             <div class="search-form">
-                <input type="search" class="form-control" placeholder="Tìm đơn hàng">
+                <input type="number" #code (keyup.enter)="searchOrder(code.value)" class="form-control"
+                    placeholder="Tìm đơn hàng theo code">
             </div>
         </div><!-- contact-sidebar-header -->
         <div class="contact-sidebar-body">
             <div class="tab-content">
-                <div id="tabContact" class="tab-pane fade active show">
+                <div class="tab-pane fade active show no-data" *ngIf="orderList.length == 0">
+                    Không có dữ liệu
+                </div>
+                <div class="tab-pane fade active show" *ngIf="orderList.length > 0">
                     <div class="pd-y-20 pd-x-10 contact-list">
-                        <div class="media" *ngFor="let item of orderList" (click)="orderDetail = item">
+                        <div *ngFor="let item of orderList"
+                            class="media {{(orderDetail?.id == item.id) ? 'active' : ''}}" (click)="chooseOrder(item)">
                             <div class="avatar avatar-sm avatar-online"><span
-                                    class="avatar-initial rounded-circle bg-gray-700">A</span></div>
+                                    class="avatar-initial rounded-circle bg-gray-700">{{item?.userName.charAt(0)}}</span>
+                            </div>
                             <div class="media-body mg-l-10">
-                                <h6 class="tx-13 mg-b-3">{{item?.userName}}</h6>
+                                <h6 class="tx-13 mg-b-3">{{item?.userName}} #{{item?.code}}</h6>
                                 <span class="tx-12">{{item?.address}}</span>
                             </div><!-- media-body -->
                             <nav>
@@ -31,84 +37,124 @@
     <div class="contact-content">
         <div class="contact-content-header">
             <nav class="nav">
-                <a href="javascript:void(0)" class="nav-link active">Đơn Hàng {{(orderDetail?.code) ? '#' + orderDetail?.code : ''}}</a>
+                <a href="#order" #other class="nav-link active" data-toggle="tab">Đơn Hàng
+                    {{(orderDetail?.code) ? '#' + orderDetail?.code : ''}}</a>
+                <a href="#salesReport" class="nav-link" data-toggle="tab">Báo Cáo Doanh Thu</a>
             </nav>
         </div><!-- contact-content-header -->
 
         <div class="contact-content-body">
-            <div class="tab-content no-data" *ngIf="orderDetail == null">
-                Vui lòng chọn một đơn hàng để xem.
-            </div>
-            <div class="tab-content" *ngIf="orderDetail">
-                <div id="contactInformation" class="tab-pane show active pd-20 pd-xl-25">
-                    <div class="d-flex align-items-center justify-content-between mg-b-25">
-                        <h6 class="mg-b-0">Thông tin nhận hàng</h6>
-                        <div class="d-flex">
-                            <a href="#modalEditContact" data-toggle="modal"
-                                class="btn btn-sm btn-white d-flex align-items-center mg-r-5"><i
-                                    data-feather="edit-2"></i><span class="d-none d-sm-inline mg-l-5"> Edit</span></a>
-                            <a href="#modalDeleteContact" data-toggle="modal"
-                                class="btn btn-sm btn-white d-flex align-items-center"><i data-feather="trash"></i><span
-                                    class="d-none d-sm-inline mg-l-5"> Delete</span></a>
+            <div class="tab-content">
+                <div id="order" class="tab-pane show active pd-20 pd-xl-25">
+                    <div class="no-data" *ngIf="orderDetail == null">
+                        Vui lòng chọn một đơn hàng để xem.
+                    </div>
+                    <div *ngIf="orderDetail">
+                        <div class="d-flex align-items-center justify-content-between mg-b-25">
+                            <h6 class="mg-b-0">Thông tin nhận hàng</h6>
+                            <div class="d-flex">
+                                <a href="javascript:void(0)" (click)="orderDetail = null"
+                                    class="btn btn-sm btn-white d-flex align-items-center mg-r-5"><i
+                                        data-feather="edit-2"></i><span class="d-none d-sm-inline mg-l-5">
+                                        Đóng</span></a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6 col-sm">
+                                <label class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Tài
+                                    khoản</label>
+                                <p class="mg-b-0">{{orderDetail?.userName}}</p>
+                            </div><!-- col -->
+                            <div class="col-6 col-sm">
+                                <label class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Địa
+                                    chỉ</label>
+                                <p class="mg-b-0">{{orderDetail?.address}}</p>
+                            </div><!-- col -->
+                            <div class="col-sm mg-t-20 mg-sm-t-0">
+                                <label class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Số
+                                    điện
+                                    thoại</label>
+                                <p class="mg-b-0">{{orderDetail?.phone}}</p>
+                            </div><!-- col -->
+                        </div><!-- row -->
+
+                        <h6 class="mg-t-40 mg-b-20">Thông tin đơn hàng</h6>
+
+                        <div class="row row-sm">
+                            <div class="table-responsive">
+                                <table class="table table-bordered mg-b-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" width="5%">ID</th>
+                                            <th scope="col" width="35%">Tên</th>
+                                            <th scope="col" width="45%">Mô Tả</th>
+                                            <th scope="col" width="15%">Giá Tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of orderDetail?.orderDetail">
+                                            <th scope="row">{{item.id}}</th>
+                                            <td><a href="{{(item?.food) ? client_url + '/p/' + util.generateURL(item?.food.name, item?.food.id) : client_url + '/c/' + util.generateURL(item?.combo.name, item?.combo.id)}}"
+                                                    target="_blank">{{(item?.food) ? item?.food.name : item?.combo.name}}</a>
+                                            </td>
+                                            <td>{{(item?.food) ? item?.food.description : item?.combo.description}}</td>
+                                            <td>{{util.formatPrice((item?.food) ? item?.food.price : item?.combo.price)}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!-- table-responsive -->
+                        </div><!-- row -->
+
+                        <h6 class="mg-t-40 mg-b-20">Trạng Thái Đơn Hàng</h6>
+
+                        <div [innerHTML]="getStatus(orderDetail?.status)">
+
+                        </div>
+
+                        <button class="btn btn-success" *ngIf="orderDetail?.status &lt; 3"
+                            (click)="confirmOrder(orderDetail)">Xác Nhận Giao Hàng</button>
+                    </div>
+                </div>
+
+                <div id="salesReport" class="tab-pane pd-20 pd-xl-25">
+
+                    <h5 class="mg-t-10 mg-b-20">Báo cáo doanh thu theo thời gian</h5>
+
+                    <div class="d-flex align-items-center justify-content-between row">
+                        <div class="col-6">
+                            <label for="from">Từ ngày</label>
+                            <input type="text" class="form-control" #from placeholder="Chọn ngày bắt đầu" id="from">
+                        </div>
+                        <div class="col-6">
+                            <label for="to">Đến ngày</label>
+                            <input type="text" class="form-control" #to placeholder="Chọn ngày kết thúc" id="to">
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-success mg-t-15" (click)="getReport(from.value, to.value)">Báo
+                                Cáo</button>
+                            <div class="spinner-border pos-absolute mg-l-5 mg-t-15" role="status" *ngIf="isLoading">
+                                <span class="sr-only">Loading...</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-6 col-sm">
-                            <label
-                                class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Username</label>
-                            <p class="mg-b-0">{{orderDetail?.userName}}</p>
-                        </div><!-- col -->
-                        <div class="col-6 col-sm">
-                            <label
-                                class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Address</label>
-                            <p class="mg-b-0">{{orderDetail?.address}}</p>
-                        </div><!-- col -->
-                        <div class="col-sm mg-t-20 mg-sm-t-0">
-                            <label
-                                class="tx-10 tx-medium tx-spacing-1 tx-color-03 tx-uppercase tx-sans mg-b-10">Phone</label>
-                            <p class="mg-b-0">{{orderDetail?.phone}}</p>
-                        </div><!-- col -->
-                    </div><!-- row -->
+                    <div *ngIf="dataDate != null" class="mg-t-20">
+                        <h5 class="mg-t-10 mg-b-20">Báo cáo doanh thu từ ngày {{dataDate.from}} đến ngày {{dataDate.to}}
+                        </h5>
 
-                    <h6 class="mg-t-40 mg-b-20">Thông tin đơn hàng</h6>
+                        <ul>
+                            <li class="text-success">{{dataStatusReport?.success}} đơn hàng thành công</li>
+                            <li class="text-danger">{{dataStatusReport?.reject}} đơn hàng thất bại</li>
+                            <li class="text-warning">{{dataStatusReport?.other}} khác</li>
+                        </ul>
 
-                    <div class="row row-sm">
-                        <div class="table-responsive">
-                            <table class="table table-bordered mg-b-0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" width="5%">ID</th>
-                                        <th scope="col" width="30%">Tên</th>
-                                        <th scope="col" width="40%">Mô Tả</th>
-                                        <th scope="col" width="15%">Giá Tiền</th>
-                                        <th scope="col" width="10%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of orderDetail?.orderDetail">
-                                        <th scope="row">{{item.id}}</th>
-                                        <td><a href="{{(item?.food) ? client_url + '/p/' + util.generateURL(item?.food.name, item?.food.id) : client_url + '/c/' + util.generateURL(item?.combo.name, item?.combo.id)}}"
-                                                target="_blank">{{(item?.food) ? item?.food.name : item?.combo.name}}</a></td>
-                                        <td>{{(item?.food) ? item?.food.description : item?.combo.description}}</td>
-                                        <td>{{util.formatPrice((item?.food) ? item?.food.price : item?.combo.price)}}</td>
-                                        <td>
-                                            <a href="/food/create?foodId={{item.id}}" class="mg-r-5">Sửa</a>
-                                            <a href="javascript:void(0)" (click)="deleteFood(item.id)" class="text-danger">Xóa</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div><!-- table-responsive -->
-                    </div><!-- row -->
-
-                    <h6 class="mg-t-40 mg-b-20">Trạng Thái Đơn Hàng</h6>
-
-                    <div [innerHTML]="getStatus(orderDetail?.status)">
-
+                        <p>Tổng có <strong>{{salesReport.length}}</strong> đơn hàng, thu lại
+                            <strong>{{util.formatPrice(util.getTotalPrice(salesReport))}}</strong></p>
                     </div>
 
-                </div>
+                </div><!-- tab-pane -->
             </div><!-- tab-content -->
         </div><!-- contact-content-body -->
 
