@@ -1,0 +1,43 @@
+<div class="pd-20">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mg-b-0">
+                <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tạo lịch trình ăn uống</li>
+            </ol>
+        </nav>
+        <div data-label="Thêm món ăn" class="df-example demo-forms mt-4">
+            <form data-parsley-validate (ngSubmit)="saveSchedule($event)">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nameSchedule">Tên combo<span class="tx-danger">*</span></label>
+                        <input required type="text" class="form-control" id="nameSchedule" placeholder="Name"
+                            [(ngModel)]="dataSchedule.name" name="name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nameSchedule">Ngày<span class="tx-danger">*</span></label>
+                        <input required type="text" class="form-control" id="nameSchedule" placeholder="Name"
+                            [(ngModel)]="dataSchedule.name" name="name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="price">Buổi (1 - Sáng, 2 - Trưa, 3 - Tối)<span class="tx-danger">*</span></label>
+                        <input required  class="form-control" id="price" placeholder="10000"
+                            [(ngModel)]="dataSchedule.price" name="price">
+                    </div>
+                </div>
+                <div class="form-row" *ngIf="dataSchedule.image != null">
+                    <div class="form-group col-md-3">
+                        <label for="preview">Xem trước ảnh</label>
+                        <img id="preview" [src]="dataSchedule.image" width="100%" height="auto">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">{{editMode ? 'Cập Nhật' : 'Lưu'}}</button>
+                <div class="spinner-border pos-absolute mg-l-5" role="status" *ngIf="isLoading">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </form>
+        </div><!-- df-example -->
+    </div>

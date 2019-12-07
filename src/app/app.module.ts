@@ -23,6 +23,7 @@ import { ListOrderComponent } from './components/order/list-order/list-order.com
 import { CreateScheduleComponent } from './components/schedule/create-schedule/create-schedule.component';
 import { ListScheduleComponent } from './components/schedule/list-schedule/list-schedule.component';
 import { ScheduleDetailsComponent } from './components/schedule/schedule-details/schedule-details.component';
+import { ScheduleComboComponent } from './components/schedule/schedule-combo/schedule-combo.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ScheduleDetailsComponent } from './components/schedule/schedule-details
     ListOrderComponent,
     CreateScheduleComponent,
     ListScheduleComponent,
-    ScheduleDetailsComponent
+    ScheduleDetailsComponent,
+    ScheduleComboComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
