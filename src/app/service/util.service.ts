@@ -46,7 +46,6 @@ export class UtilService {
       str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
       str = str.replace(/đ/g, "d");
       str = str.replace(/!|@|%|\^|\*|\color{#fff}{|}∣|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g, "-");
-
       str = str.replace(/-+-/g, "-");
       str = str.replace(/^\-+|\-+$/g, "");
       str = str.replace(/ /g, "-");
@@ -55,6 +54,7 @@ export class UtilService {
   };
 
   getTotalPrice(arr: { reduce: (arg0: (a: any, b: any) => number, arg1: number) => void; }) {
+    if (arr == null) return;
     return arr.reduce((a, b) => parseInt(a) + (parseInt(b.totalPrice)), 0)
   }
 
@@ -62,11 +62,11 @@ export class UtilService {
     var dates = [];
     for (let I = 0; I < Math.abs(X); I++) {
       dates.push(new Date(new Date().getTime() - ((X >= 0 ? I : (I - I - I)) * 24 * 60 * 60 * 1000)).toLocaleString());
-    }
+    };
     return dates.map((date) => {
-      date = date.split(', ')[0];
+      date = date.split(', ')[1];
       let objDate = date.split('/');
-      return `${objDate[2]}-${objDate[0]}-${('0' + objDate[1]).slice(-2)}`;
+      return `${objDate[2]}-${objDate[1]}-${('0' + objDate[0]).slice(-2)}`;
     }).reverse();
   }
 }
