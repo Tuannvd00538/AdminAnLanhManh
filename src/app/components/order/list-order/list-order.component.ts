@@ -25,15 +25,15 @@ export class ListOrderComponent implements OnInit {
   getStatus(status: any) {
     switch (status) {
       case 1:
-        return;
+        return `<p class="text-success">Đã đặt hàng</p>`;
       case 2:
-        return;
+        return `<p class="text-success">Đã xác nhận</p>`;
       case 3:
-        return;
+        return `<p class="text-warning">Đang được giao</p>`;
       case 4:
-        return;
+        return `<p class="text-success">Giao thành công</p>`;
       case 5:
-        return;
+        return `<p class="text-error">Giao thất bại</p>`;
       default:
         break;
     }
