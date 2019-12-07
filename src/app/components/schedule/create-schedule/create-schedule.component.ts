@@ -126,7 +126,26 @@ export class CreateScheduleComponent implements OnInit {
       console.log(error);
     });
   }
+
+  getScheduleById(url) {
+    const that = this;
+    axios.get(url).then(function (response) {
+      response.data.data= response.data.data.id.map(schedule => {
+        return schedule.id;
+      });
+      that.dataSchedule = response.data.data;
+      console.log(that.dataSchedule);
+      
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
   ngOnInit() {
     this.getListCategory(`${environment.api_url}/api/category`);
+    this.scheduleId = this.route.snapshot.queryParamMap.get('scheduleId');
+    if (this.scheduleId != null) {
+      this.editMode = true;
+      this.getScheduleById(`${environment.api_url}/api/schedule/${this.scheduleId}`);
+    }
   }
 }
