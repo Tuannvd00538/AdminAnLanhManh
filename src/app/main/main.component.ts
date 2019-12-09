@@ -327,7 +327,6 @@ export class MainComponent implements OnInit {
     });
 
   }
-
   getStatusOrder(status) {
     switch (status) {
       case 1:

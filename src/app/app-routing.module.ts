@@ -12,7 +12,8 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { ListOrderComponent } from './components/order/list-order/list-order.component';
 import { CreateScheduleComponent } from './components/schedule/create-schedule/create-schedule.component';
 import { ListScheduleComponent } from './components/schedule/list-schedule/list-schedule.component';
-
+import { ScheduleDetailsComponent } from './components/schedule/schedule-details/schedule-details.component';
+import { ScheduleComboComponent } from './components/schedule/schedule-combo/schedule-combo.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [AuthGuardService] },
@@ -26,6 +27,8 @@ const routes: Routes = [
   { path: 'auth/login', component: LoginComponent },
   { path: 'schedule/create', component: CreateScheduleComponent, canActivate: [AuthGuardService] },
   { path: 'schedule/list', component: ListScheduleComponent, canActivate: [AuthGuardService] },
+  { path: 'schedule/details', component: ScheduleDetailsComponent, canActivate: [AuthGuardService] },
+  { path: 'schedule/schedule-combo/create', component: ScheduleComboComponent, canActivate: [AuthGuardService] },
   { path: '**', component: MainComponent, canActivate: [AuthGuardService] }
 ];
 

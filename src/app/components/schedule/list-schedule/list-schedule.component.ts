@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import Swal from 'sweetalert2';
 import { UtilService } from 'src/app/service/util.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-schedule',
@@ -14,7 +15,8 @@ export class ListScheduleComponent implements OnInit {
 
   constructor(
     @Inject(LOCAL_STORAGE) private localStorage: any,
-    public util: UtilService
+    public util: UtilService,
+    private route: ActivatedRoute
   ) { }
 
   client_url: any = environment.client_url;
@@ -35,22 +37,6 @@ export class ListScheduleComponent implements OnInit {
   }
 
   isLoading: boolean = false;
-
-  // showMoreData() {
-  //   const that = this;
-  //   if (this.isLoading) return;
-  //   this.isLoading = true;
-  //   this.currentPage = this.currentPage + 1;
-  //   axios.get(`${environment.api_url}/api/schedule/list?page=${this.currentPage}`).then(function (response) {
-  //     const newArray = [...that.listSchedule.data, ...response.data.data];
-  //     that.listSchedule.data = newArray;
-  //     that.listSchedule.restPagination = response.data.restPagination;
-  //     that.isLoading = false;
-  //   }).catch(function (error) {
-  //     that.isLoading = false;
-  //     console.log(error);
-  //   });
-  // }
 
   token: any = this.localStorage.getItem('token');
 
@@ -86,8 +72,25 @@ export class ListScheduleComponent implements OnInit {
       }
     })
   }
-
+  getScheduleById(url) {
+    const that = this;
+    axios.get(url).then(function (response) {
+      response.data.data.categoryIds = response.data.data.categories.map(cate => {
+        return cate.id;
+      });
+      that.listSchedule = response.data.data;
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+  scheduleId: any = null;
+  editMode: boolean = false;
   ngOnInit() {
     this.getListSchedule(`${environment.api_url}/api/schedule/`);
+    this.scheduleId = this.route.snapshot.queryParamMap.get('scheduleId');
+    if (this.scheduleId != null) {
+      this.editMode = true;
+      this.getScheduleById(`${environment.api_url}/api/schedule/${this.scheduleId}`);
+    }
   }
 }

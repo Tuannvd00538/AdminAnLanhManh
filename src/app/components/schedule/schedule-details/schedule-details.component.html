@@ -1,0 +1,35 @@
+<div class="pd-20">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mg-b-0">
+            <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/schedule/list">Danh Sách Lịch Trình</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Chi tiết lịch trình</li>
+        </ol>
+    </nav>
+    <div class="mt-4" >
+        <button  type="button" class="btn btn-outline-success" >
+            <a href="/schedule/schedule-combo/create?scheduleId={{dataSchedule.id}}" class="mg-r-5">Thêm</a>
+        </button>
+    </div>
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th scope="col" width="5%">ID</th>
+                    <th scope="col" width="15%">Ngày</th>
+                    <th scope="col" width="15%">Bữa ăn</th>
+                    <th scope="col" width="50%">Tên món ăn</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listSchedule.data">
+                    <th scope="row">{{item?.id}}</th>
+                    <td>{{item?.day}}</td>
+                    <td>{{item?.type}}</td>
+                    <td><a href="{{client_url}}/c/{{util.generateURL(item?.combo.name, item?.combo.id)}}"
+                        target="_blank">{{item.combo.name}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- table-responsive -->
+</div>

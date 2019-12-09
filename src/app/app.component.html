@@ -46,6 +46,11 @@
           [routerLink]="['']" class="nav-link"><i data-feather="shopping-bag"></i>
           <span>Thống kê</span></a></li>
 
+      <li class="nav-label mg-t-25">Đơn Hàng</li>
+      <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
+          [routerLink]="['order/list']" class="nav-link"><i data-feather="layers"></i>
+          <span>Quản Lý Đơn Hàng</span></a></li>
+          
       <li class="nav-label mg-t-25">Đồ Ăn</li>
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
           [routerLink]="['food/create']" class="nav-link"><i data-feather="activity"></i>
@@ -77,11 +82,6 @@
       <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
           [routerLink]="['schedule/list']" class="nav-link"><i data-feather="layers"></i>
           <span>Danh Sách Lộ Trình</span></a></li>
-
-      <li class="nav-label mg-t-25">Đơn Hàng</li>
-      <li class="nav-item"><a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}"
-          [routerLink]="['order/list']" class="nav-link"><i data-feather="layers"></i>
-          <span>Quản Lý Đơn Hàng</span></a></li>
     </ul>
   </div>
 </aside>

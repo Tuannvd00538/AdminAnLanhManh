@@ -1,0 +1,42 @@
+<div class="pd-20">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mg-b-0">
+                <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tạo lịch trình ăn uống chi tiết</li>
+            </ol>
+        </nav>
+        <div data-label="Thêm món ăn" class="df-example demo-forms mt-4">   
+            <form data-parsley-validate (ngSubmit)="saveScheduleCombo($event)">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="comboId">Combo món ăn<span class="tx-danger">*</span></label>
+                        <select class="form-control" id="comboId" [(ngModel)]="scheduleCombo.comboId"
+                            name="comboId" required>
+                            <option *ngFor="let item of listCombo" [value]="item.id">{{item.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="day">Ngày<span class="tx-danger">*</span></label>
+                        <input required type="number" class="form-control" id="day" placeholder="1"
+                            [(ngModel)]="scheduleCombo.day" name="day">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="type">Bữa ăn<span class="tx-danger">*</span></label>
+                        <select id="type" class="form-control" [(ngModel)]="scheduleCombo.type" name="type" required>
+                            <option value="1">Sáng</option>
+                            <option value="2">Trưa</option>
+                            <option value="3">Tối</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">{{editMode ? 'Cập Nhật' : 'Lưu'}}</button>
+                <div class="spinner-border pos-absolute mg-l-5" role="status" *ngIf="isLoading">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </form>
+        </div><!-- df-example -->
+    </div>
