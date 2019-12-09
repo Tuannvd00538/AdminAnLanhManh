@@ -99,7 +99,7 @@
                                 <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-10">Doanh Thu Đạt Được</h6>
                             </div><!-- col -->
                             <div class="col-sm-5 mg-t-20 mg-sm-t-0">
-                                <h3 class="tx-normal tx-rubik tx-spacing--2 mg-b-5">{{util.formatPrice(util.getTotalPrice(dataOrder) / dataOrder?.length)}}</h3>
+                                <h3 class="tx-normal tx-rubik tx-spacing--2 mg-b-5">{{util.formatPrice(util.getTotalPrice(dataOrder) / (dataOrder?.length || 0))}}</h3>
                                 <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-10">Doanh Thu / Khách Hàng</h6>
                             </div><!-- col -->
                         </div><!-- row -->
