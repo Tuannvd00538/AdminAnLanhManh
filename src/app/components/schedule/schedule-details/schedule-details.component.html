@@ -6,6 +6,11 @@
             <li class="breadcrumb-item active" aria-current="page">Chi tiết lịch trình</li>
         </ol>
     </nav>
+    <div class="mt-4" >
+        <button  type="button" class="btn btn-outline-success" >
+            <a href="/schedule/schedule-combo/create?scheduleId={{dataSchedule.id}}" class="mg-r-5">Thêm</a>
+        </button>
+    </div>
     <div class="table-responsive mt-4">
         <table class="table table-bordered mg-b-0">
             <thead>
@@ -14,29 +19,17 @@
                     <th scope="col" width="15%">Ngày</th>
                     <th scope="col" width="15%">Bữa ăn</th>
                     <th scope="col" width="50%">Tên món ăn</th>
-                    <th scope="col" width="20%"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of listSchedule.data">
-                    <th scope="row">{{item.id}}</th>
-                    <td>{{item.day}}</td>
-                    <td>{{item.type}}</td>
-                    <td>{{item.combo.name}}</td>
-                    <!-- <td>{{util.formatPrice(item.price)}}</td> -->
-                    <td>
-                        <a href="/schedule/schedule-combo/create" class="mg-r-5 text-success">Thêm</a>
-                        <a href="javascript:void(0)" class="mg-r-5">Sửa</a>
-                        <a href="javascript:void(0)" (click)="deleteSchedule(item.id)" class="text-danger">Xóa</a>
-                    </td>
+                    <th scope="row">{{item?.id}}</th>
+                    <td>{{item?.day}}</td>
+                    <td>{{item?.type}}</td>
+                    <td><a href="{{client_url}}/c/{{util.generateURL(item?.combo.name, item?.combo.id)}}"
+                        target="_blank">{{item.combo.name}}</a></td>
                 </tr>
             </tbody>
         </table>
     </div><!-- table-responsive -->
-    <div class="demo-modal-btn" *ngIf="listSchedule?.restPagination?.page != listSchedule?.restPagination?.totalPages">
-        <a href="javascript:void(0)" (click)="showMoreData()" class="btn btn-default" *ngIf="!isLoading">Xem Thêm</a>
-        <div class="spinner-border" role="status" *ngIf="isLoading">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
 </div>

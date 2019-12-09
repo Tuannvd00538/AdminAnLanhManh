@@ -2,36 +2,35 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mg-b-0">
                 <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Tạo lịch trình ăn uống</li>
+                <li class="breadcrumb-item active" aria-current="page">Tạo lịch trình ăn uống chi tiết</li>
             </ol>
         </nav>
-        <div data-label="Thêm món ăn" class="df-example demo-forms mt-4">
-            <form data-parsley-validate (ngSubmit)="saveSchedule($event)">
+        <div data-label="Thêm món ăn" class="df-example demo-forms mt-4">   
+            <form data-parsley-validate (ngSubmit)="saveScheduleCombo($event)">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="nameSchedule">Tên combo<span class="tx-danger">*</span></label>
-                        <input required type="text" class="form-control" id="nameSchedule" placeholder="Name"
-                            [(ngModel)]="dataSchedule.name" name="name">
+                        <label for="comboId">Combo món ăn<span class="tx-danger">*</span></label>
+                        <select class="form-control" id="comboId" [(ngModel)]="scheduleCombo.comboId"
+                            name="comboId" required>
+                            <option *ngFor="let item of listCombo" [value]="item.id">{{item.name}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="nameSchedule">Ngày<span class="tx-danger">*</span></label>
-                        <input required type="text" class="form-control" id="nameSchedule" placeholder="Name"
-                            [(ngModel)]="dataSchedule.name" name="name">
+                        <label for="day">Ngày<span class="tx-danger">*</span></label>
+                        <input required type="number" class="form-control" id="day" placeholder="1"
+                            [(ngModel)]="scheduleCombo.day" name="day">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="price">Buổi (1 - Sáng, 2 - Trưa, 3 - Tối)<span class="tx-danger">*</span></label>
-                        <input required  class="form-control" id="price" placeholder="10000"
-                            [(ngModel)]="dataSchedule.price" name="price">
-                    </div>
-                </div>
-                <div class="form-row" *ngIf="dataSchedule.image != null">
-                    <div class="form-group col-md-3">
-                        <label for="preview">Xem trước ảnh</label>
-                        <img id="preview" [src]="dataSchedule.image" width="100%" height="auto">
+                        <label for="type">Bữa ăn<span class="tx-danger">*</span></label>
+                        <select id="type" class="form-control" [(ngModel)]="scheduleCombo.type" name="type" required>
+                            <option value="1">Sáng</option>
+                            <option value="2">Trưa</option>
+                            <option value="3">Tối</option>
+                        </select>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">{{editMode ? 'Cập Nhật' : 'Lưu'}}</button>
