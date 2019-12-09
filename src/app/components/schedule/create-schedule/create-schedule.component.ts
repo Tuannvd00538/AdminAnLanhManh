@@ -130,9 +130,11 @@ export class CreateScheduleComponent implements OnInit {
   getScheduleById(url) {
     const that = this;
     axios.get(url).then(function (response) {
+      response.data.data.categoryIds = response.data.data.categories.map(cate => {
+        return cate.id;
+      });
       that.dataSchedule = response.data.data;
       console.log(that.dataSchedule);
-      
     }).catch(function (error) {
       console.log(error);
     });

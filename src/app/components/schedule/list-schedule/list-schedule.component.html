@@ -18,7 +18,7 @@
             <tbody>
                 <tr *ngFor="let item of listSchedule.data">
                     <th scope="row">{{item.id}}</th>
-                    <td><a >{{item.name}}</a></td>
+                    <td><a href="/schedule/details?scheduleId={{item.id}}">{{item.name}}</a></td>
                     <td>{{item.description}}</td>
                     <!-- <td>{{util.formatPrice(item.price)}}</td> -->
                     <td>
