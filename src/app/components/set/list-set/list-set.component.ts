@@ -40,7 +40,7 @@ export class ListSetComponent implements OnInit {
     if (this.isLoading) return;
     this.isLoading = true;
     this.currentPage = this.currentPage + 1;
-    axios.get(`${environment.api_url}/api/combo/list?page=${this.currentPage}`).then(function (response) {
+    axios.get(`${environment.api_url}/api/combo/list?limit=12&page=${this.currentPage}`).then(function (response) {
       const newArray = [...that.listSet.data, ...response.data.data];
       that.listSet.data = newArray;
       that.listSet.restPagination = response.data.restPagination;
@@ -87,7 +87,7 @@ export class ListSetComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.getListSet(`${environment.api_url}/api/combo/list?page=${this.currentPage}`);
+    this.getListSet(`${environment.api_url}/api/combo/list?limit=12&page=${this.currentPage}`);
   }
 
 }

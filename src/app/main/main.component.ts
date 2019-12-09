@@ -153,21 +153,21 @@ export class MainComponent implements OnInit {
             color: '#69b2f8',
             lines: {
               fill: false,
-              lineWidth: 2
+              lineWidth: 6
             }
           }, {
             data: ${JSON.stringify(this.orderPending())},
             color: '#d1e6fa',
             lines: {
               fill: false,
-              lineWidth: 4
+              lineWidth: 8
             }
           }, {
             data: ${JSON.stringify(this.orderReject())},
             color: '#d1e6fa',
             lines: {
               fill: false,
-              lineWidth: 4
+              lineWidth: 10
             }
           }], {
             series: {
