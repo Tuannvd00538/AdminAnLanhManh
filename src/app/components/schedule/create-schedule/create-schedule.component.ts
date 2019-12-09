@@ -60,7 +60,7 @@ export class CreateScheduleComponent implements OnInit {
       if (this.editMode) {
         axios.put(`${environment.api_url}/api/schedule/update/${this.scheduleId}`, that.dataSchedule, { headers: { Authorization: that.token } }).then(function (response) {
           Swal.fire({
-            title: 'Lưu món ăn thành công',
+            title: 'Lưu lịch trình thành công',
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
@@ -84,7 +84,7 @@ export class CreateScheduleComponent implements OnInit {
         axios.post(`${environment.api_url}/api/schedule/create`, that.dataSchedule, { headers: { Authorization: that.token } }).then(function (response) {
           that.isLoading = false;
           Swal.fire({
-            title: 'Lưu lịch trình ăn uống thành công',
+            title: 'Lưu lịch trình thành công',
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
@@ -134,7 +134,6 @@ export class CreateScheduleComponent implements OnInit {
         return cate.id;
       });
       that.dataSchedule = response.data.data;
-      console.log(that.dataSchedule);
     }).catch(function (error) {
       console.log(error);
     });

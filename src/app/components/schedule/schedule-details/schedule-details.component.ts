@@ -26,54 +26,25 @@ export class ScheduleDetailsComponent implements OnInit {
     const that = this;
     axios.get(url).then(function (response) {
       that.listSchedule = response.data;
-      console.log(response.data);
-      //that.currentPage = that.listSchedule.restPagination.page;
     }).catch(function (error) {
       console.log(error);
     });
   }
-
-  isLoading: boolean = false;
-
+  getScheduleById(url) {
+    const that = this;
+    axios.get(url).then(function (response) {
+      that.dataSchedule = response.data.data;
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+  dataSchedule: any = [];
   token: any = this.localStorage.getItem('token');
-
-  // deleteScheduleCombo(id) {
-  //   const that = this;
-  //   Swal.fire({
-  //     title: 'Bạn có chắc chắn?',
-  //     text: "Sau khi xóa, bạn sẽ không thể khôi phục lại được!",
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Có, tiếp tục xóa!',
-  //     cancelButtonText: 'Hủy'
-  //   }).then((result) => {
-  //     if (result.value) {
-  //       axios.delete(`${environment.api_url}/api/schedule/${id}`, { headers: { Authorization: that.token } }).then(function (response) {
-  //         Swal.fire(
-  //           'Đã xóa',
-  //           'Lich trình bạn chọn đã bị xóa',
-  //           'success'
-  //         );
-  //         that.listSchedule.data = that.listSchedule.data.filter(schedule => {
-  //           return schedule.id != id;
-  //         });
-  //       }).catch(function (error) {
-  //         Swal.fire(
-  //           'Oops...',
-  //           'Có lỗi xảy ra',
-  //           'error'
-  //         );
-  //       });
-  //     }
-  //   })
-  // }
-
   scheduleId: any = null;
   ngOnInit() {
     this.scheduleId = this.route.snapshot.queryParamMap.get('scheduleId');
     this.getListScheduleCombo(`${environment.api_url}/api/schedule-combo/schedule/${this.scheduleId}`);
+    this.getScheduleById(`${environment.api_url}/api/schedule/${this.scheduleId}`);
+      
   }
-
 }
