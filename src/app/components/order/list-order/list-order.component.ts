@@ -31,13 +31,13 @@ export class ListOrderComponent implements OnInit {
       case 1:
         return `<p class="text-warning">Đã đặt hàng</p>`;
       case 2:
-        return `<p class="text-warning">Đã xác nhận</p>`;
+        return `<p class="text-warning">Đã xác nhận đơn hàng</p>`;
       case 3:
-        return `<p class="text-warning">Đang được giao</p>`;
+        return `<p class="text-warning">Đang giao hàng</p>`;
       case 4:
-        return `<p class="text-success">Giao thành công</p>`;
+        return `<p class="text-success">Giao hàng thành công</p>`;
       case 5:
-        return `<p class="text-error">Giao thất bại</p>`;
+        return `<p class="text-danger">Giao hàng thất bại</p>`;
       default:
         break;
     }
@@ -54,7 +54,24 @@ export class ListOrderComponent implements OnInit {
     const that = this;
     axios.put(`${environment.api_url}/api/order/${order.id}?status=3`, null,{ headers: { Authorization: that.token } }).then((response) => {
       that.orderDetail.status = 3;
-      console.log(response.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  shipSuccess(order) {
+    const that = this;
+    axios.put(`${environment.api_url}/api/order/${order.id}?status=4`, null,{ headers: { Authorization: that.token } }).then((response) => {
+      that.orderDetail.status = 4;
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  rejectOrder(order) {
+    const that = this;
+    axios.put(`${environment.api_url}/api/order/${order.id}?status=5`, null,{ headers: { Authorization: that.token } }).then((response) => {
+      that.orderDetail.status = 5;
     }).catch((err) => {
       console.log(err);
     })

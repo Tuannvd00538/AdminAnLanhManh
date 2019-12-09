@@ -20,58 +20,6 @@
     </div>
 
     <div class="row row-xs">
-        <div class="col-sm-6 col-lg-3">
-            <div class="card card-body">
-                <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Lãi Suất</h6>
-                <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">0.81%</h3>
-                    <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-success">1.2% <i
-                                class="icon ion-md-arrow-up"></i></span></p>
-                </div>
-                <div class="chart-three">
-                    <div id="flotChart3" class="flot-chart ht-30"></div>
-                </div><!-- chart-three -->
-            </div>
-        </div><!-- col -->
-        <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
-            <div class="card card-body">
-                <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Số Lượng Đơn Hàng</h6>
-                <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">3,137</h3>
-                    <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-danger">0.7% <i
-                                class="icon ion-md-arrow-down"></i></span></p>
-                </div>
-                <div class="chart-three">
-                    <div id="flotChart4" class="flot-chart ht-30"></div>
-                </div><!-- chart-three -->
-            </div>
-        </div><!-- col -->
-        <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
-            <div class="card card-body">
-                <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Giá Trị Trung Bình</h6>
-                <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">$306.20</h3>
-                    <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-danger">0.3% <i
-                                class="icon ion-md-arrow-down"></i></span></p>
-                </div>
-                <div class="chart-three">
-                    <div id="flotChart5" class="flot-chart ht-30"></div>
-                </div><!-- chart-three -->
-            </div>
-        </div><!-- col -->
-        <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
-            <div class="card card-body">
-                <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Đơn Hàng Thành Công</h6>
-                <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                    <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">1,650</h3>
-                    <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-success">2.1% <i
-                                class="icon ion-md-arrow-up"></i></span></p>
-                </div>
-                <div class="chart-three">
-                    <div id="flotChart6" class="flot-chart ht-30"></div>
-                </div><!-- chart-three -->
-            </div>
-        </div><!-- col -->
         <div class="col-lg-8 col-xl-7 mg-t-10">
             <div class="card">
                 <div class="card-header pd-y-20 d-md-flex align-items-center justify-content-between">
@@ -79,15 +27,17 @@
                     <ul class="list-inline d-flex mg-t-20 mg-sm-t-10 mg-md-t-0 mg-b-0">
                         <li class="list-inline-item d-flex align-items-center">
                             <span class="d-block wd-10 ht-10 bg-df-1 rounded mg-r-5"></span>
-                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Thành Công</span>
+                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Thành Công
+                                ({{success}})</span>
                         </li>
                         <li class="list-inline-item d-flex align-items-center mg-l-5">
                             <span class="d-block wd-10 ht-10 bg-df-2 rounded mg-r-5"></span>
-                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Đang Xử Lý</span>
+                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Đang Xử Lý
+                                ({{pending}})</span>
                         </li>
                         <li class="list-inline-item d-flex align-items-center mg-l-5">
                             <span class="d-block wd-10 ht-10 bg-df-3 rounded mg-r-5"></span>
-                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Thất Bại</span>
+                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Thất Bại ({{reject}})</span>
                         </li>
                     </ul>
                 </div><!-- card-header -->
@@ -95,12 +45,16 @@
                     <div class="pos-absolute t-20 l-20 wd-xl-100p z-index-10">
                         <div class="row">
                             <div class="col-sm-5">
-                                <h3 class="tx-normal tx-rubik tx-spacing--2 mg-b-5">{{util.formatPrice(util.getTotalPrice(dataOrder))}}</h3>
-                                <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-10">Doanh Thu Đạt Được</h6>
+                                <h3 class="tx-normal tx-rubik tx-spacing--2 mg-b-5">{{util.formatPrice(totalMoneySuccess)}}
+                                </h3>
+                                <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-10">Doanh Thu
+                                    Đạt Được</h6>
                             </div><!-- col -->
                             <div class="col-sm-5 mg-t-20 mg-sm-t-0">
-                                <h3 class="tx-normal tx-rubik tx-spacing--2 mg-b-5">{{util.formatPrice(util.getTotalPrice(dataOrder) / (dataOrder?.length || 0))}}</h3>
-                                <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-10">Doanh Thu / Khách Hàng</h6>
+                                <h3 class="tx-normal tx-rubik tx-spacing--2 mg-b-5">
+                                    {{util.formatPrice(totalMoneySuccess / success)}}</h3>
+                                <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-10">Doanh Thu /
+                                    Khách Hàng</h6>
                             </div><!-- col -->
                         </div><!-- row -->
                     </div>
@@ -125,12 +79,14 @@
                         <div class="col-sm">
                             <h4 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">1,680</h4>
                             <p class="tx-11 tx-uppercase tx-spacing-1 tx-semibold mg-b-10 tx-primary">Người Dùng</p>
-                            <div class="tx-12 tx-color-03">Có 1,680/2,520 người dùng hoạt động trên hệ thống của bạn.</div>
+                            <div class="tx-12 tx-color-03">Có 1,680/2,520 người dùng hoạt động trên hệ thống của bạn.
+                            </div>
                         </div><!-- col -->
                         <div class="col-sm mg-t-20 mg-sm-t-0">
                             <h4 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">2,520</h4>
                             <p class="tx-11 tx-uppercase tx-spacing-1 tx-semibold mg-b-10 tx-pink">Tài Khoản</p>
-                            <div class="tx-12 tx-color-03">Có tất cả 2,520 tài khoản đã đăng ký trên hệ thống của bạn.</div>
+                            <div class="tx-12 tx-color-03">Có tất cả 2,520 tài khoản đã đăng ký trên hệ thống của bạn.
+                            </div>
                         </div><!-- col -->
                     </div><!-- row -->
                 </div><!-- card-body -->
@@ -142,7 +98,7 @@
                     <h6 class="mg-b-0">Giao dịch gần nhất</h6>
                 </div>
                 <ul class="list-group list-group-flush tx-13">
-                    <li class="list-group-item d-flex pd-sm-x-20"*ngFor="let item of orderList | slice:0:6">
+                    <li class="list-group-item d-flex pd-sm-x-20" *ngFor="let item of orderList | slice:0:6">
                         <div class="avatar d-none d-sm-block" [innerHTML]="getStatusOrder(item.status)">
 
                         </div>

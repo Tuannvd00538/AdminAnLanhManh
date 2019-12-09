@@ -36,6 +36,8 @@ export class MainComponent implements OnInit {
     return JSON.stringify(rs);
   }
 
+  success: number = 0;
+  totalMoneySuccess: number = 0;
   orderSuccess() {
     const that = this;
     var data = [];
@@ -45,9 +47,11 @@ export class MainComponent implements OnInit {
     that.date.forEach((date, i) => {
       date = date.split('-');
       date = `${date[2]}-${date[1]}-${date[0]}`;
-      that.orderList.forEach(ord => {
+      that.dataOrder.forEach(ord => {
         var regEx = new RegExp(date, 'g');
-        if (ord.createdAt.match(regEx) != null && (ord.status == 2 || ord.status == 4)) {
+        if (ord.createdAt.match(regEx) != null && ord.status == 4) {
+          that.success = that.success + 1;
+          that.totalMoneySuccess = that.totalMoneySuccess + ord.totalPrice;
           data[i][1] = data[i][1] + 1;
         }
       });
@@ -55,6 +59,7 @@ export class MainComponent implements OnInit {
     return data;
   }
 
+  pending: number = 0;
   orderPending() {
     const that = this;
     var data = [];
@@ -64,9 +69,10 @@ export class MainComponent implements OnInit {
     that.date.forEach((date, i) => {
       date = date.split('-');
       date = `${date[2]}-${date[1]}-${date[0]}`;
-      that.orderList.forEach(ord => {
+      that.dataOrder.forEach(ord => {
         var regEx = new RegExp(date, 'g');
-        if (ord.createdAt.match(regEx) != null && ord.status != 2 && ord.status < 4) {
+        if (ord.createdAt.match(regEx) != null && ord.status < 4) {
+          that.pending = that.pending + 1;
           data[i][1] = data[i][1] + 1;
         }
       });
@@ -74,6 +80,7 @@ export class MainComponent implements OnInit {
     return data;
   }
 
+  reject: number = 0;
   orderReject() {
     const that = this;
     var data = [];
@@ -83,9 +90,10 @@ export class MainComponent implements OnInit {
     that.date.forEach((date, i) => {
       date = date.split('-');
       date = `${date[2]}-${date[1]}-${date[0]}`;
-      that.orderList.forEach(ord => {
+      that.dataOrder.forEach(ord => {
         var regEx = new RegExp(date, 'g');
         if (ord.createdAt.match(regEx) != null && ord.status == 5) {
+          that.reject = that.reject + 1;
           data[i][1] = data[i][1] + 1;
         }
       });
@@ -110,12 +118,10 @@ export class MainComponent implements OnInit {
     });
 
     var date = this.util.timeFrom(7);
-    axios.get(`${environment.api_url}/api/order?from=${date[0]} 00:00&to=${date[6]} 00:00`, { headers: { Authorization: that.token } }).then((response) => {
+    axios.get(`${environment.api_url}/api/order?from=${date[0]} 00:00&to=${date[6]} 00:00&limit=1000`, { headers: { Authorization: that.token } }).then((response) => {
       var currentNumber = 0;
       var number = response.data.data.length / 6;
       that.dataOrder = response.data.data;
-      console.log(that.dataOrder);
-
       let a = new Promise((resolve, reject) => {
         for (let i = 0; i < 7; i++) {
           switch (i) {
@@ -161,7 +167,7 @@ export class MainComponent implements OnInit {
             color: '#d1e6fa',
             lines: {
               fill: false,
-              lineWidth: 6
+              lineWidth: 4
             }
           }], {
             series: {

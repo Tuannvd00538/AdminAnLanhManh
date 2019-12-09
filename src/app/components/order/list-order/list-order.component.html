@@ -117,6 +117,12 @@
 
                         <button class="btn btn-success" *ngIf="orderDetail?.status &lt; 3"
                             (click)="confirmOrder(orderDetail)">Xác Nhận Giao Hàng</button>
+
+                        <button class="btn btn-success" *ngIf="orderDetail?.status &gt; 2 && orderDetail?.status &lt; 4"
+                            (click)="shipSuccess(orderDetail)">Giao Hàng Thành Công</button>
+
+                        <button class="btn btn-danger mg-l-10" *ngIf="orderDetail?.status &gt; 2 && orderDetail?.status &lt; 4"
+                            (click)="rejectOrder(orderDetail)">Giao Hàng Thất Bại</button>
                     </div>
                 </div>
 
