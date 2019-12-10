@@ -24,6 +24,8 @@ import { CreateScheduleComponent } from './components/schedule/create-schedule/c
 import { ListScheduleComponent } from './components/schedule/list-schedule/list-schedule.component';
 import { ScheduleDetailsComponent } from './components/schedule/schedule-details/schedule-details.component';
 import { ScheduleComboComponent } from './components/schedule/schedule-combo/schedule-combo.component';
+import { CreateUserComponent } from './components/user/create-user/create-user.component';
+import { ListUserComponent } from './components/user/list-user/list-user.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { ScheduleComboComponent } from './components/schedule/schedule-combo/sch
     CreateScheduleComponent,
     ListScheduleComponent,
     ScheduleDetailsComponent,
-    ScheduleComboComponent
+    ScheduleComboComponent,
+    CreateUserComponent,
+    ListUserComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
