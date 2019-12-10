@@ -37,6 +37,7 @@ export class MainComponent implements OnInit {
   }
 
   success: number = 0;
+  successArr: any = [];
   totalMoneySuccess: number = 0;
   orderSuccess() {
     const that = this;
@@ -51,6 +52,7 @@ export class MainComponent implements OnInit {
         var regEx = new RegExp(date, 'g');
         if (ord.createdAt.match(regEx) != null && ord.status == 4) {
           that.success = that.success + 1;
+          that.successArr.push(ord);
           that.totalMoneySuccess = that.totalMoneySuccess + ord.totalPrice;
           data[i][1] = data[i][1] + 1;
         }
@@ -60,6 +62,7 @@ export class MainComponent implements OnInit {
   }
 
   pending: number = 0;
+  pendingArr: any = [];
   orderPending() {
     const that = this;
     var data = [];
@@ -72,6 +75,7 @@ export class MainComponent implements OnInit {
       that.dataOrder.forEach(ord => {
         var regEx = new RegExp(date, 'g');
         if (ord.createdAt.match(regEx) != null && ord.status < 4) {
+          that.pendingArr.push(ord);
           that.pending = that.pending + 1;
           data[i][1] = data[i][1] + 1;
         }
@@ -81,6 +85,7 @@ export class MainComponent implements OnInit {
   }
 
   reject: number = 0;
+  rejectArr: any = [];
   orderReject() {
     const that = this;
     var data = [];
@@ -93,6 +98,7 @@ export class MainComponent implements OnInit {
       that.dataOrder.forEach(ord => {
         var regEx = new RegExp(date, 'g');
         if (ord.createdAt.match(regEx) != null && ord.status == 5) {
+          that.rejectArr.push(ord);
           that.reject = that.reject + 1;
           data[i][1] = data[i][1] + 1;
         }
@@ -102,6 +108,8 @@ export class MainComponent implements OnInit {
   }
 
   dataOrder: any = null;
+
+  dataModal: any = null;
 
   ngOnInit() {
     let script = this._renderer2.createElement('script');
@@ -336,9 +344,9 @@ export class MainComponent implements OnInit {
   getStatusOrder(status) {
     switch (status) {
       case 1:
-        return `<span class="avatar-initial rounded-circle bg-teal"><i class="icon ion-md-checkmark"></i></span>`;
+        return `<span class="avatar-initial rounded-circle bg-indigo op-5"><i class="icon ion-md-return-left"></i></span>`;
       case 2:
-        return `<span class="avatar-initial rounded-circle bg-teal"><i class="icon ion-md-checkmark"></i></span>`;
+        return `<span class="avatar-initial rounded-circle bg-indigo op-5"><i class="icon ion-md-return-left"></i></span>`;
       case 3:
         return `<span class="avatar-initial rounded-circle bg-orange op-5"><i class="icon ion-md-bus"></i></span>`;
       case 4:

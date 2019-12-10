@@ -18,17 +18,20 @@
                     <ul class="list-inline d-flex mg-t-20 mg-sm-t-10 mg-md-t-0 mg-b-0">
                         <li class="list-inline-item d-flex align-items-center">
                             <span class="d-block wd-10 ht-10 bg-df-1 rounded mg-r-5"></span>
-                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Thành Công
-                                ({{success}})</span>
+                            <a href="#modalSignUp" data-toggle="modal" (click)="dataModal = successArr"
+                                class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Thành Công
+                                ({{success}})</a>
                         </li>
                         <li class="list-inline-item d-flex align-items-center mg-l-5">
                             <span class="d-block wd-10 ht-10 bg-df-2 rounded mg-r-5"></span>
-                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Đang Xử Lý
-                                ({{pending}})</span>
+                            <a href="#modalSignUp" data-toggle="modal" (click)="dataModal = pendingArr"
+                                class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Đang Xử Lý
+                                ({{pending}})</a>
                         </li>
                         <li class="list-inline-item d-flex align-items-center mg-l-5">
                             <span class="d-block wd-10 ht-10 bg-df-3 rounded mg-r-5"></span>
-                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Thất Bại ({{reject}})</span>
+                            <a href="#modalSignUp" data-toggle="modal" (click)="dataModal = rejectArr"
+                                class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">Thất Bại ({{reject}})</a>
                         </li>
                     </ul>
                 </div><!-- card-header -->
@@ -36,7 +39,8 @@
                     <div class="pos-absolute t-20 l-20 wd-xl-100p z-index-10">
                         <div class="row">
                             <div class="col-sm-5">
-                                <h3 class="tx-normal tx-rubik tx-spacing--2 mg-b-5">{{util.formatPrice(totalMoneySuccess)}}
+                                <h3 class="tx-normal tx-rubik tx-spacing--2 mg-b-5">
+                                    {{util.formatPrice(totalMoneySuccess)}}
                                 </h3>
                                 <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-10">Doanh Thu
                                     Đạt Được</h6>
@@ -67,7 +71,9 @@
 
                         </div>
                         <div class="pd-sm-l-10">
-                            <p class="tx-medium mg-b-0">Đơn hàng #{{item.code}}</p>
+                            <p class="tx-medium mg-b-0"><a href="/order/list?code={{item.code}}&id={{item.id}}"
+                                    target="_blank">Đơn hàng
+                                    #{{item.code}}</a></p>
                             <small class="tx-12 tx-color-03 mg-b-0">{{item.createdAt}}</small>
                         </div>
                         <div class="mg-l-auto text-right">
@@ -82,3 +88,35 @@
         <img src="http://anlanhmanh.com/assets/img/logo/logo.png" alt="AnLanhManh">
     </div>
 </div><!-- container -->
+
+<div class="modal fade" id="modalSignUp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered wd-sm-400" role="document">
+        <div class="modal-content">
+            <div class="modal-body pd-20 pd-sm-40">
+                <div>
+                    <div class="card ht-100p">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h6 class="mg-b-0">Thông tin order</h6>
+                        </div>
+                        <ul class="list-group list-group-flush tx-13">
+                            <li class="list-group-item d-flex pd-sm-x-20" *ngFor="let item of dataModal">
+                                <div class="avatar d-none d-sm-block" [innerHTML]="getStatusOrder(item.status)">
+
+                                </div>
+                                <div class="pd-sm-l-10">
+                                    <p class="tx-medium mg-b-0"><a href="/order/list?code={{item.code}}&id={{item.id}}"
+                                            target="_blank">Đơn hàng
+                                            #{{item.code}}</a></p>
+                                    <small class="tx-12 tx-color-03 mg-b-0">{{item.createdAt}}</small>
+                                </div>
+                                <div class="mg-l-auto text-right">
+                                    <p class="tx-medium mg-b-0">{{util.formatPrice(item.totalPrice)}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- card -->
+                </div>
+            </div><!-- modal-body -->
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->

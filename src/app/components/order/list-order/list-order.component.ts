@@ -15,7 +15,8 @@ export class ListOrderComponent implements OnInit {
   constructor(
     private _renderer2: Renderer2,
     public util: UtilService,
-    @Inject(DOCUMENT) private _document: Document
+    @Inject(DOCUMENT) private _document: Document,
+    private route: ActivatedRoute
   ) { }
 
   client_url: any = null;
@@ -52,7 +53,7 @@ export class ListOrderComponent implements OnInit {
 
   confirmOrder(order) {
     const that = this;
-    axios.put(`${environment.api_url}/api/order/${order.id}?status=3`, null,{ headers: { Authorization: that.token } }).then((response) => {
+    axios.put(`${environment.api_url}/api/order/${order.id}?status=3`, null, { headers: { Authorization: that.token } }).then((response) => {
       that.orderDetail.status = 3;
     }).catch((err) => {
       console.log(err);
@@ -61,7 +62,7 @@ export class ListOrderComponent implements OnInit {
 
   shipSuccess(order) {
     const that = this;
-    axios.put(`${environment.api_url}/api/order/${order.id}?status=4`, null,{ headers: { Authorization: that.token } }).then((response) => {
+    axios.put(`${environment.api_url}/api/order/${order.id}?status=4`, null, { headers: { Authorization: that.token } }).then((response) => {
       that.orderDetail.status = 4;
     }).catch((err) => {
       console.log(err);
@@ -70,17 +71,18 @@ export class ListOrderComponent implements OnInit {
 
   rejectOrder(order) {
     const that = this;
-    axios.put(`${environment.api_url}/api/order/${order.id}?status=5`, null,{ headers: { Authorization: that.token } }).then((response) => {
+    axios.put(`${environment.api_url}/api/order/${order.id}?status=5`, null, { headers: { Authorization: that.token } }).then((response) => {
       that.orderDetail.status = 5;
     }).catch((err) => {
       console.log(err);
     })
   }
 
-  searchOrder(code) {
+  searchOrder(code, param_option) {
     const that = this;
     axios.get(`${environment.api_url}/api/order?search=${code}`, { headers: { Authorization: that.token } }).then((response) => {
       that.orderList = response.data.data;
+      if (param_option) that.orderDetail = that.orderList[0];
     }).catch((err) => {
       that.isLoading = false;
       console.log(err);
@@ -153,6 +155,9 @@ export class ListOrderComponent implements OnInit {
     })
   }
 
+  viewCode: any = null;
+  viewId: any = null;
+
   ngOnInit() {
     const that = this;
     if (this.token == null || this.token == undefined) {
@@ -160,11 +165,19 @@ export class ListOrderComponent implements OnInit {
       return;
     }
     this.client_url = environment.client_url;
-    axios.get(`${environment.api_url}/api/order?limit=1000`, { headers: { Authorization: that.token } }).then((response) => {
-      that.orderList = response.data.data;
-    }).catch((err) => {
-      console.log(err);
-    });
+
+    this.viewCode = this.route.snapshot.queryParamMap.get('code');
+    this.viewId = this.route.snapshot.queryParamMap.get('id');
+
+    if (this.viewCode != null && this.viewId != null) {
+      that.searchOrder(this.viewCode, true);
+    } else {
+      axios.get(`${environment.api_url}/api/order?limit=1000`, { headers: { Authorization: that.token } }).then((response) => {
+        that.orderList = response.data.data;
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
     let script = this._renderer2.createElement('script');
     script.text = `
       $(function(){
