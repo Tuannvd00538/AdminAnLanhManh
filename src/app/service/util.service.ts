@@ -59,14 +59,13 @@ export class UtilService {
   }
 
   timeFrom(X: number) {
+    var curr = new Date();
     var dates = [];
-    for (let I = 0; I < Math.abs(X); I++) {
-      dates.push(new Date(new Date().getTime() - ((X >= 0 ? I : (I - I - I)) * 24 * 60 * 60 * 1000)).toLocaleString());
+    for (var i = 0; i < X; i++) {
+      curr.setDate(curr.getDate() - 1);
+      var data = `${curr.getFullYear()}-${curr.getMonth() + 1}-${('0' + (curr.getDate() + 1)).slice(-2)}`;
+      dates.unshift(data);
     };
-    return dates.map((date) => {
-      date = date.split(', ')[1];
-      let objDate = date.split('/');
-      return `${objDate[2]}-${objDate[1]}-${('0' + objDate[0]).slice(-2)}`;
-    }).reverse();
+    return dates;
   }
 }

@@ -118,7 +118,7 @@ export class MainComponent implements OnInit {
     });
 
     var date = this.util.timeFrom(7);
-    axios.get(`${environment.api_url}/api/order?from=${date[0]} 00:00&to=${date[6]} 00:00&limit=1000`, { headers: { Authorization: that.token } }).then((response) => {
+    axios.get(`${environment.api_url}/api/order?from=${date[0]} 00:00&to=${date[6]} 23:59&limit=1000`, { headers: { Authorization: that.token } }).then((response) => {
       var currentNumber = 0;
       var number = response.data.data.length / 6;
       that.dataOrder = response.data.data;

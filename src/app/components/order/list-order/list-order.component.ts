@@ -121,7 +121,7 @@ export class ListOrderComponent implements OnInit {
       to = to.split('/');
     };
     var validFrom = `${from[2]}-${from[0]}-${from[1]} 00:00`;
-    var validTo = `${to[2]}-${to[0]}-${to[1]} 00:00`;
+    var validTo = `${to[2]}-${to[0]}-${to[1]} 23:59`;
     if (this.isLoading) return;
     that.isLoading = true;
     axios.get(`${environment.api_url}/api/order?from=${validFrom}&to=${validTo}&limit=1000`, { headers: { Authorization: that.token } }).then((response) => {
