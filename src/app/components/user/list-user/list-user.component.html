@@ -1,36 +1,30 @@
 <div class="pd-20">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mg-b-0">
-                <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Danh sách người dùng</li>
-            </ol>
-        </nav>
-        <div class="table-responsive mt-4">
-            <table class="table table-bordered mg-b-0">
-                <thead>
-                    <tr>
-                        <th scope="col" width="5%">ID</th>
-                        <th scope="col" width="15%">Tên</th>
-                        <th scope="col" width="20%">Tên tài khoản</th>
-                        <th scope="col" width="30%">Email</th>
-                        <th scope="col" width="20%">Số điện thoại</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of listUser.data">
-                        <th scope="row">{{item?.id}}</th>
-                        <td>{{item?.name}}</td>
-                        <td>{{item?.username}}</td>
-                        <td>{{item?.email}}</td>
-                        <td>{{item?.phone}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div><!-- table-responsive -->
-        <div class="demo-modal-btn" *ngIf="listFood?.restPagination?.page != listFood?.restPagination?.totalPages">
-            <a href="javascript:void(0)" (click)="showMoreData()" class="btn btn-default" *ngIf="!isLoading">Xem Thêm</a>
-            <div class="spinner-border" role="status" *ngIf="isLoading">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mg-b-0">
+            <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Danh sách người dùng</li>
+        </ol>
+    </nav>
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th scope="col" width="5%">ID</th>
+                    <th scope="col" width="15%">Tên</th>
+                    <th scope="col" width="20%">Tên tài khoản</th>
+                    <th scope="col" width="30%">Email</th>
+                    <th scope="col" width="20%">Số điện thoại</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listUser.data">
+                    <th scope="row">{{item?.id}}</th>
+                    <td>{{item?.name}}</td>
+                    <td>{{item?.username}}</td>
+                    <td>{{item?.email}}</td>
+                    <td>{{item?.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- table-responsive -->
+</div>

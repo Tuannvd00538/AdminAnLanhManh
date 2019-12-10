@@ -23,8 +23,6 @@ export class ListUserComponent implements OnInit {
 
   listUser: any = [];
 
-  currentPage: any = 1;
-
   getListUser(url: string) {
     const that = this;
     axios.get(url, { headers: { Authorization: that.token } }).then(function (response) {
@@ -38,26 +36,8 @@ export class ListUserComponent implements OnInit {
 
   token: any = this.localStorage.getItem('token');
 
-  // getScheduleById(url) {
-  //   const that = this;
-  //   axios.get(url).then(function (response) {
-  //     response.data.data.categoryIds = response.data.data.categories.map(cate => {
-  //       return cate.id;
-  //     });
-  //     that.listSchedule = response.data.data;
-  //   }).catch(function (error) {
-  //     console.log(error);
-  //   });
-  // }
-  scheduleId: any = null;
-  editMode: boolean = false;
   ngOnInit() {
     this.getListUser(`${environment.api_url}/api/users`);
-    //this.scheduleId = this.route.snapshot.queryParamMap.get('scheduleId');
-    // if (this.scheduleId != null) {
-    //   this.editMode = true;
-    //   this.getScheduleById(`${environment.api_url}/api/schedule/${this.scheduleId}`);
-    // }
   }
 
 }
