@@ -1,0 +1,51 @@
+<div class="pd-20">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mg-b-0">
+            <li class="breadcrumb-item"><a href="/">Trang Chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tạo Tài Khoản</li>
+        </ol>
+    </nav>
+    <div data-label="Tạo Danh Mục" class="df-example demo-forms mt-4">
+        <form data-parsley-validate (ngSubmit)="saveUser($event)">
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="name">Tên<span class="tx-danger">*</span></label>
+                    <input [(ngModel)]="dataUser.name" required type="text" class="form-control" id="name" placeholder="Name" name="name">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="username">Tên Tài Khoản<span class="tx-danger">*</span></label>
+                    <input [(ngModel)]="dataUser.username" required type="text" class="form-control" id="username" placeholder="Username" name="username">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-10">
+                    <label for="email">Email<span class="tx-danger">*</span></label>
+                    <input [(ngModel)]="dataUser.email" type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="phone">Số Điện Thoại<span class="tx-danger">*</span></label>
+                    <input [(ngModel)]="dataUser.phone" type="phone" class="form-control" id="phone" placeholder="Phone" name="phone" required>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="password">Mật Khẩu<span class="tx-danger">*</span></label>
+                    <input [(ngModel)]="dataUser.password" type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="role">Quyền Tài Khoản<span class="tx-danger">*</span></label>
+                    <select id="role" class="form-control" [(ngModel)]="dataUser.role" name="role" required>
+                        <option value="1">User</option>
+                        <option value="2">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">{{editMode ? 'Cập Nhật' : 'Lưu'}}</button>
+            <div class="spinner-border pos-absolute mg-l-5" role="status" *ngIf="isLoading">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </form>
+    </div><!-- df-example -->
+</div>
